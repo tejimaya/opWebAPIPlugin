@@ -9,24 +9,22 @@
  */
 
 /**
- * member entry action
+ * feeds actions.
  *
  * @package    OpenPNE
- * @subpackage member
- * @author     Kousuke Ebihara <ebihara@tejimaya.com>
+ * @subpackage feeds
+ * @author     Your name here
+ * @version    SVN: $Id: actions.class.php 9301 2008-05-27 01:08:46Z dwhittle $
  */
-class entryAction extends sfAction
+class feedsActions extends sfActions
 {
  /**
-  * Executes this action
+  * Executes index action
   *
   * @param sfRequest $request A request object
   */
-  public function execute($request)
+  public function executeIndex($request)
   {
-    $this->member = MemberPeer::retrieveByPk($request->getParameter('id'));
-    $this->forward404Unless($this->member);
-
-    return sfView::SUCCESS;
+    $this->forward('default', 'module');
   }
 }
