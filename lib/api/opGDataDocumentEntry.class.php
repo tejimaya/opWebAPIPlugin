@@ -22,13 +22,17 @@ class opGDataDocumentEntry extends opGDataDocument
   public function __construct($entry = null, $isInsert = false)
   {
     $this->isInsert = $isInsert;
-    if (!is_null($entry))
+    if (is_null($entry))
+    {
+      parent::__construct();
+    }
+    elseif ($entry instanceof SimpleXMLElement)
     {
       $this->elements = $entry;
     }
     else
     {
-      parent::__construct();
+      parent::__construct($entry);
     }
   }
 
