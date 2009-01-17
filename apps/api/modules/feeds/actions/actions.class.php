@@ -19,6 +19,9 @@ class feedsActions extends sfActions
 {
   public function preExecute()
   {
+    $list = SnsConfigPeer::get('op_web_api_plugin_ip_list');
+    $this->forward404Unless(in_array(@$_SERVER['REMOTE_ADDR'], explode("\n", $list)));
+
     $this->getResponse()->setHttpHeader('GData-Version', 2);
     $this->getResponse()->setHttpHeader('Content-Type', 'text/xml');
 
