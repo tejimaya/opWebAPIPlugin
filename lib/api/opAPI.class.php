@@ -26,12 +26,25 @@ abstract class opAPI
 
   public function getParameter($name, $default = null)
   {
-    if (!isset($this->parameters))
+    if (!isset($this->parameters[$name]))
     {
       return $default;
     }
 
     return $this->parameters[$name];
+  }
+
+  public function getGeneralFeed($title)
+  {
+    sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url'));
+    $internalUri = sfContext::getInstance()->getRouting()->getCurrentInternalUri();
+
+    $feed = new opGDataDocumentFeed();
+    $feed->setTitle($title.' - '.opConfig::get('sns_name'));
+    $feed->setId(md5($internalUri));
+    $feed->setLink(url_for($internalUri, true), 'self');
+
+    return $feed;
   }
 
   public function getRequiredParameter($name)
@@ -41,51 +54,6 @@ abstract class opAPI
     if (is_null($result))
     {
       throw new RuntimeException(sprintf('The required argument "%s" is not specified.', $name));
-    }
-
-    return $result;
-  }
-
-  public function createFeedBySNS()
-  {
-    $feed = new opGDataDocumentFeed();
-    $feed->setTitle(opConfig::get('sns_name'));
-    $feed->setAuthor(opConfig::get('admin_email'), opConfig::get('admin_email'));
-
-    return $feed;
-  }
-
-  public function parseSearchQueries()
-  {
-    $result = array();
-
-    if (isset($this->parameters['id']))
-    {
-      $result['id'] = $this->parameters['id'];
-    }
-
-    if (isset($this->parameters['q']))
-    {
-      $fulltext = array('include' => array(), 'exclude' => array());
-
-      $extracted = opToolkit::extractEnclosedStrings($this->parameters['q']);
-      $words = $extracted['enclosed'];
-      $queryString = $extracted['base'];
-
-      $words = array_merge($words, explode(' ', $queryString));
-      foreach ($words as $value)
-      {
-        if ($value[0] === '-')
-        {
-          $fulltext['exclude'][] = $value;
-        }
-        else
-        {
-          $fulltext['include'][] = $value;
-        }
-      }
-
-      $result['fulltext'] = $fulltext;
     }
 
     return $result;

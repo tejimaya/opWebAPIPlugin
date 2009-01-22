@@ -17,28 +17,39 @@
  */
 class opAPIDiary extends opAPI implements opAPIInterface
 {
-  public function retrieve()
+  public function feed()
   {
-    $diaries = DiaryPeer::retrieveByPks($this->search());
-    if (!$diaries)
+    if ($id = $this->getParameter('member_id'))
+    {
+      $diaries = DiaryPeer::getMemberDiaryPager($id, $this->getParameter('_pg', 1));
+    }
+    else
+    {
+      $diaries = DiaryPeer::getDiaryPager($this->getParameter('_pg', 1));
+    }
+
+    if (!$result = $diaries->getResults())
     {
       return false;
     }
 
-    sfContext::getInstance()->getConfiguration()->loadHelpers(array('sfImage', 'Asset'));
-
-    $feed = $this->createFeedBySNS();
-    $feed->setId('http://example.com/');
-
-    foreach ($diaries as $diary)
+    $feed = $this->getGeneralFeed('Diaries');
+    foreach ($result as $diary)
     {
       $entry = $feed->addEntry();
       $this->createEntryByDiary($diary, $entry);
     }
-
-    $feed->setUpdated($diary->getUpdatedAt());
+    $feed->setUpdated($result[0]->getCreatedAt());
 
     return $feed->publish();
+  }
+
+  public function entry()
+  {
+    $id = $this->getRequiredParameter('id');
+    $diary = DiaryPeer::retrieveByPk($id);
+    $entry = $this->createEntryByDiary($diary);
+    return $entry->publish();
   }
 
   public function insert()
@@ -94,32 +105,9 @@ class opAPIDiary extends opAPI implements opAPIInterface
     return true;
   }
 
-  public function search()
-  {
-    $query = $this->parseSearchQueries();
-    if (isset($query['id']))
-    {
-      return array($query['id']);
-    }
-
-    $result = array();
-
-    if (false !== $ids = $this->fullTextSearch($query['fulltext']))
-    {
-      $result = array_merge($result, $ids);
-    }
-
-    return $result;
-  }
-
-  public function fullTextSearch($query)
-  {
-    return false;
-  }
-
   protected function createEntryByDiary(Diary $diary, SimpleXMLElement $entry = null)
   {
-    sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url'));
+    sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url', 'opUtil'));
 
     $member = $diary->getMember();
     $mailAddress = $member->getConfig('pc_address');
@@ -131,11 +119,12 @@ class opAPIDiary extends opAPI implements opAPIInterface
     $entry = new opGDataDocumentEntry($entry);
     $entry->setTitle($diary->getTitle());
     $entry->setContent($diary->getBody());
-    $entry->setId($diary->getId());
+    $entry->setId(md5(Diary::PEER.$diary->getId()));
     $entry->setAuthor($member->getName(), $mailAddress);
     $entry->setPublished($diary->getCreatedAt());
     $entry->setUpdated($diary->getUpdatedAt());
-    $entry->setLink(url_for('@feeds_update_entry?model=diary&id='.$member->getId(), true), 'edit');
+    $entry->setLink(app_url_for('pc_frontend', '@diary_show?id='.$diary->getId(), true), 'self', 'alternate');
+    $entry->setLink(app_url_for('mobile_frontend', '@diary_show?id='.$diary->getId(), true), 'self', 'alternate');
 
     return $entry;
   }

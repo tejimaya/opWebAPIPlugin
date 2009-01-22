@@ -17,28 +17,39 @@
  */
 class opAPICommunityTopic extends opAPI implements opAPIInterface
 {
-  public function retrieve()
+  public function feed()
   {
-    $topics = CommunityTopicPeer::retrieveByPks($this->search());
-    if (!$topics)
+    if ($id = $this->getParameter('community_id'))
+    {
+      $communityTopic = CommunityTopicPeer::retrieveByCommunityId($id);
+    }
+    else
+    {
+      $communityTopic = CommunityTopicPeer::doSelect(new Criteria());
+    }
+
+    if (!$communityTopic)
     {
       return false;
     }
 
-    sfContext::getInstance()->getConfiguration()->loadHelpers(array('sfImage', 'Asset'));
-
-    $feed = $this->createFeedBySNS();
-    $feed->setId('http://example.com/');
-
-    foreach ($topics as $topic)
+    $feed = $this->getGeneralFeed('CommunityTopics');
+    foreach ($communityTopic as $topic)
     {
       $entry = $feed->addEntry();
       $this->createEntryByTopic($topic, $entry);
     }
-
-    $feed->setUpdated($topic->getUpdatedAt());
+    $feed->setUpdated($communityTopic[0]->getCreatedAt());
 
     return $feed->publish();
+  }
+
+  public function entry()
+  {
+    $id = $this->getRequiredParameter('id');
+    $topic = CommunityTopicPeer::retrieveByPk($id);
+    $entry = $this->createEntryByTopic($topic);
+    return $entry->publish();
   }
 
   public function insert()
@@ -96,32 +107,9 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
     return true;
   }
 
-  public function search()
-  {
-    $query = $this->parseSearchQueries();
-    if (isset($query['id']))
-    {
-      return array($query['id']);
-    }
-
-    $result = array();
-
-    if (false !== $ids = $this->fullTextSearch($query['fulltext']))
-    {
-      $result = array_merge($result, $ids);
-    }
-
-    return $result;
-  }
-
-  public function fullTextSearch($query)
-  {
-    return false;
-  }
-
   protected function createEntryByTopic(CommunityTopic $topic, SimpleXMLElement $entry = null)
   {
-    sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url'));
+    sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url', 'opUtil'));
 
     $member = $topic->getMember();
     $mailAddress = $member->getConfig('pc_address');
@@ -132,12 +120,11 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
 
     $entry = new opGDataDocumentEntry($entry);
     $entry->setTitle($topic->getName());
-    $entry->setContent($topic->getName());
-    $entry->setId($topic->getId());
+    $entry->setId(md5(CommunityTopic::PEER.$topic->getId()));
     $entry->setAuthor($topic->getName(), $mailAddress);
     $entry->setPublished($topic->getCreatedAt());
     $entry->setUpdated($topic->getUpdatedAt());
-    $entry->setLink(url_for('@feeds_update_entry?model=topic&id='.$topic->getId(), true), 'edit');
+    $entry->setLink(app_url_for('pc_frontend', 'communityTopic/detail?id='.$topic->getId(), true), 'self', 'alternate');
 
     return $entry;
   }

@@ -19,10 +19,9 @@ class feedsActions extends sfActions
 {
   public function preExecute()
   {
-    $list = SnsConfigPeer::get('op_web_api_plugin_ip_list');
+    $list = SnsConfigPeer::get('op_web_api_plugin_ip_list', '127.0.0.1');
     $this->forward404Unless(in_array(@$_SERVER['REMOTE_ADDR'], explode("\n", $list)));
 
-    $this->getResponse()->setHttpHeader('GData-Version', 2);
     $this->getResponse()->setHttpHeader('Content-Type', 'text/xml');
 
     $request = sfContext::getInstance()->getRequest();
@@ -36,13 +35,25 @@ class feedsActions extends sfActions
   }
 
  /**
-  * Executes retrieveEntries action
+  * Executes feedEntries action
   *
   * @param sfRequest $request A request object
   */
-  public function executeRetrieveEntries($request)
+  public function executeFeedEntries($request)
   {
-    $this->result = $this->api->retrieve();
+    $this->result = $this->api->feed();
+    $this->forward404Unless($this->result);
+    return $this->renderText($this->result);
+  }
+
+ /**
+  * Executes retrieveEntry action
+  *
+  * @param sfRequest $request A request object
+  */
+  public function executeRetrieveEntry($request)
+  {
+    $this->result = $this->api->entry();
     $this->forward404Unless($this->result);
     return $this->renderText($this->result);
   }

@@ -21,9 +21,15 @@ class opWebAPIPluginRouting
     $routing = $event->getSubject();
 
     $routes = array(
-      'feeds_retrieve_entry' => new sfRequestRoute(
-        '/feeds/:model/*',
-        array('module' => 'feeds', 'action' => 'retrieveEntries'),
+      'feeds_feed' => new sfRequestRoute(
+        '/feeds/:model/feed/*',
+        array('module' => 'feeds', 'action' => 'feedEntries'),
+        array('sf_method' => array('get'))
+      ),
+
+      'feeds_entry' => new sfRequestRoute(
+        '/feeds/:model/id/:id',
+        array('module' => 'feeds', 'action' => 'retrieveEntry'),
         array('sf_method' => array('get'))
       ),
 

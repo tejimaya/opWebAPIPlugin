@@ -17,28 +17,39 @@
  */
 class opAPICommunityTopicComment extends opAPI implements opAPIInterface
 {
-  public function retrieve()
+  public function feed()
   {
-    $comments = CommunityTopicCommentPeer::retrieveByPks($this->search());
-    if (!$comments)
+    if ($id = $this->getParameter('topic_id'))
+    {
+      $communityTopicComment = CommunityTopicCommentPeer::retrieveByCommunityTopicId($id);
+    }
+    else
+    {
+      $communityTopicComment = CommunityTopicCommentPeer::doSelect(new Criteria());
+    }
+
+    if (!$communityTopicComment)
     {
       return false;
     }
 
-    sfContext::getInstance()->getConfiguration()->loadHelpers(array('sfImage', 'Asset'));
-
-    $feed = $this->createFeedBySNS();
-    $feed->setId('http://example.com/');
-
-    foreach ($comments as $comment)
+    $feed = $this->getGeneralFeed('CommunityTopicComments');
+    foreach ($communityTopicComment as $comment)
     {
       $entry = $feed->addEntry();
       $this->createEntryByTopicComment($comment, $entry);
     }
-
-    $feed->setUpdated($comment->getUpdatedAt());
+    $feed->setUpdated($communityTopicComment[0]->getCreatedAt());
 
     return $feed->publish();
+  }
+
+  public function entry()
+  {
+    $id = $this->getRequiredParameter('id');
+    $comment = CommunityTopicCommentPeer::retrieveByPk($id);
+    $entry = $this->createEntryByTopicComment($comment);
+    return $entry->publish();
   }
 
   public function insert()
@@ -96,32 +107,9 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
     return true;
   }
 
-  public function search()
-  {
-    $query = $this->parseSearchQueries();
-    if (isset($query['id']))
-    {
-      return array($query['id']);
-    }
-
-    $result = array();
-
-    if (false !== $ids = $this->fullTextSearch($query['fulltext']))
-    {
-      $result = array_merge($result, $ids);
-    }
-
-    return $result;
-  }
-
-  public function fullTextSearch($query)
-  {
-    return false;
-  }
-
   protected function createEntryByTopicComment(CommunityTopicComment $comment, SimpleXMLElement $entry = null)
   {
-    sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url'));
+    sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url', 'opUtil'));
 
     $member = $comment->getMember();
     $mailAddress = $member->getConfig('pc_address');
@@ -133,11 +121,11 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
     $entry = new opGDataDocumentEntry($entry);
     $entry->setTitle($comment->getCommunityTopic()->getName());
     $entry->setContent($comment->getBody());
-    $entry->setId($comment->getId());
+    $entry->setId(md5(CommunityTopicComment::PEER.$comment->getId()));
     $entry->setAuthor($member->getName(), $mailAddress);
     $entry->setPublished($comment->getCreatedAt());
     $entry->setUpdated($comment->getUpdatedAt());
-    $entry->setLink(url_for('@feeds_update_entry?model=communityTopicComment&id='.$comment->getId(), true), 'edit');
+    $entry->setLink(app_url_for('pc_frontend', 'communityTopic/detail?id='.$comment->getCommunityTopic()->getId(), true), 'self', 'alternate');
 
     return $entry;
   }

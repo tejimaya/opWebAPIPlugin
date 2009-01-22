@@ -17,9 +17,9 @@
  */
 interface opAPIInterface
 {
-  public function retrieve();
+  public function feed();
+  public function entry();
   public function insert();
   public function update();
   public function delete();
-  public function search();
 }
