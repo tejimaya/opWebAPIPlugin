@@ -37,7 +37,7 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
     foreach ($communityTopic as $topic)
     {
       $entry = $feed->addEntry();
-      $this->createEntryByTopic($topic, $entry);
+      $this->createEntryByInstance($topic, $entry);
     }
     $feed->setUpdated($communityTopic[0]->getCreatedAt());
 
@@ -48,7 +48,7 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
   {
     $id = $this->getRequiredParameter('id');
     $topic = CommunityTopicPeer::retrieveByPk($id);
-    $entry = $this->createEntryByTopic($topic);
+    $entry = $this->createEntryByInstance($topic);
     return $entry->publish();
   }
 
@@ -70,7 +70,7 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
     $topic->setName($elements->title);
     $topic->save();
 
-    $responseEntry = $this->createEntryByTopic($topic);
+    $responseEntry = $this->createEntryByInstance($topic);
     return $responseEntry->publish();
   }
 
@@ -90,7 +90,7 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
     $topic->setName($elements->title);
     $topic->save();
 
-    $responseEntry = $this->createEntryByTopic($topic);
+    $responseEntry = $this->createEntryByInstance($topic);
     return $responseEntry->publish();
   }
 
@@ -107,23 +107,12 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
     return true;
   }
 
-  protected function createEntryByTopic(CommunityTopic $topic, SimpleXMLElement $entry = null)
+  protected function createEntryByInstance(BaseObject $topic, SimpleXMLElement $entry = null)
   {
+    $entry = parent::createEntryByInstance($topic, $entry);
     sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url', 'opUtil'));
-
-    $member = $topic->getMember();
-    $mailAddress = $member->getConfig('pc_address');
-    if (!$mailAddress)
-    {
-      $mailAddress = $member->getConfig('mobile_address');
-    }
-
-    $entry = new opAtomPubDocumentEntry($entry);
     $entry->setTitle($topic->getName());
-    $entry->setId($this->generateEntryId($topic));
-    $entry->setAuthor($topic->getName(), $mailAddress);
-    $entry->setPublished($topic->getCreatedAt());
-    $entry->setUpdated($topic->getUpdatedAt());
+    $entry->setAuthorByMember($topic->getMember());
     $entry->setLink(app_url_for('pc_frontend', 'communityTopic/detail?id='.$topic->getId(), true), 'self', 'alternate');
 
     return $entry;

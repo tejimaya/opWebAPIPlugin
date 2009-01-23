@@ -37,7 +37,7 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
     foreach ($communityTopicComment as $comment)
     {
       $entry = $feed->addEntry();
-      $this->createEntryByTopicComment($comment, $entry);
+      $this->createEntryByInstance($comment, $entry);
     }
     $feed->setUpdated($communityTopicComment[0]->getCreatedAt());
 
@@ -48,7 +48,7 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
   {
     $id = $this->getRequiredParameter('id');
     $comment = CommunityTopicCommentPeer::retrieveByPk($id);
-    $entry = $this->createEntryByTopicComment($comment);
+    $entry = $this->createEntryByInstance($comment);
     return $entry->publish();
   }
 
@@ -70,7 +70,7 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
     $comment->setBody($elements->content);
     $comment->save();
 
-    $responseEntry = $this->createEntryByTopicComment($comment);
+    $responseEntry = $this->createEntryByInstance($comment);
     return $responseEntry->publish();
   }
 
@@ -90,7 +90,7 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
     $comment->setBody($elements->content);
     $comment->save();
 
-    $responseEntry = $this->createEntryByTopicComment($comment);
+    $responseEntry = $this->createEntryByInstance($comment);
     return $responseEntry->publish();
   }
 
@@ -107,24 +107,13 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
     return true;
   }
 
-  protected function createEntryByTopicComment(CommunityTopicComment $comment, SimpleXMLElement $entry = null)
+  protected function createEntryByInstance(BaseObject $comment, SimpleXMLElement $entry = null)
   {
+    $entry = parent::createEntryByInstance($comment, $entry);
     sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url', 'opUtil'));
-
-    $member = $comment->getMember();
-    $mailAddress = $member->getConfig('pc_address');
-    if (!$mailAddress)
-    {
-      $mailAddress = $member->getConfig('mobile_address');
-    }
-
-    $entry = new opAtomPubDocumentEntry($entry);
     $entry->setTitle($comment->getCommunityTopic()->getName());
     $entry->setContent($comment->getBody());
-    $entry->setId($this->generateEntryId($comment));
-    $entry->setAuthor($member->getName(), $mailAddress);
-    $entry->setPublished($comment->getCreatedAt());
-    $entry->setUpdated($comment->getUpdatedAt());
+    $entry->setAuthorByMember($comment->getMember());
     $entry->setLink(app_url_for('pc_frontend', 'communityTopic/detail?id='.$comment->getCommunityTopic()->getId(), true), 'self', 'alternate');
 
     return $entry;

@@ -76,6 +76,16 @@ class opAtomPubDocumentEntry extends opAtomPubDocument
     $author->addChild('email', $email);
   }
 
+  public function setAuthorByMember(Member $member)
+  {
+    $mailAddress = $member->getConfig('pc_address');
+    if (!$mailAddress)
+    {
+      $mailAddress = $member->getConfig('mobile_address');
+    }
+    $this->setAuthor($member->getName(), $mailAddress);
+  }
+
   public function setPublished($published)
   {
     $datetime = new DateTime($published);

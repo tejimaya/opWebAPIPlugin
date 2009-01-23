@@ -37,7 +37,7 @@ class opAPIDiary extends opAPI implements opAPIInterface
     foreach ($result as $diary)
     {
       $entry = $feed->addEntry();
-      $this->createEntryByDiary($diary, $entry);
+      $this->createEntryByInstance($diary, $entry);
     }
     $feed->setUpdated($result[0]->getCreatedAt());
 
@@ -48,7 +48,7 @@ class opAPIDiary extends opAPI implements opAPIInterface
   {
     $id = $this->getRequiredParameter('id');
     $diary = DiaryPeer::retrieveByPk($id);
-    $entry = $this->createEntryByDiary($diary);
+    $entry = $this->createEntryByInstance($diary);
     return $entry->publish();
   }
 
@@ -67,7 +67,7 @@ class opAPIDiary extends opAPI implements opAPIInterface
     $diary->setMember($member);
     $diary->save();
 
-    $responseEntry = $this->createEntryByDiary($diary);
+    $responseEntry = $this->createEntryByInstance($diary);
     return $responseEntry->publish();
   }
 
@@ -88,7 +88,7 @@ class opAPIDiary extends opAPI implements opAPIInterface
     $diary->setBody($elements->content);
     $diary->save();
 
-    $responseEntry = $this->createEntryByDiary($diary);
+    $responseEntry = $this->createEntryByInstance($diary);
     return $responseEntry->publish();
   }
 
@@ -105,24 +105,13 @@ class opAPIDiary extends opAPI implements opAPIInterface
     return true;
   }
 
-  protected function createEntryByDiary(Diary $diary, SimpleXMLElement $entry = null)
+  protected function createEntryByInstance(BaseObject $diary, SimpleXMLElement $entry = null)
   {
+    $entry = parent::createEntryByInstance($diary, $entry);
     sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url', 'opUtil'));
-
-    $member = $diary->getMember();
-    $mailAddress = $member->getConfig('pc_address');
-    if (!$mailAddress)
-    {
-      $mailAddress = $member->getConfig('mobile_address');
-    }
-
-    $entry = new opAtomPubDocumentEntry($entry);
     $entry->setTitle($diary->getTitle());
     $entry->setContent($diary->getBody());
-    $entry->setId($this->generateEntryId($diary));
-    $entry->setAuthor($member->getName(), $mailAddress);
-    $entry->setPublished($diary->getCreatedAt());
-    $entry->setUpdated($diary->getUpdatedAt());
+    $entry->setAuthorByMember($diary->getMember());
     $entry->setLink(app_url_for('pc_frontend', '@diary_show?id='.$diary->getId(), true), 'self', 'alternate');
     $entry->setLink(app_url_for('mobile_frontend', '@diary_show?id='.$diary->getId(), true), 'self', 'alternate');
 

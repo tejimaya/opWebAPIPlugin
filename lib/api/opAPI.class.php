@@ -63,4 +63,14 @@ abstract class opAPI
   {
     return md5(get_class($entry).$entry->getId());
   }
+
+  protected function createEntryByInstance(BaseObject $obj, SimpleXMLElement $entry = null)
+  {
+    $entry = new opAtomPubDocumentEntry($entry);
+    $entry->setId($this->generateEntryId($obj));
+    $entry->setPublished($obj->getCreatedAt());
+    $entry->setUpdated($obj->getUpdatedAt());
+
+    return $entry;
+  }
 }
