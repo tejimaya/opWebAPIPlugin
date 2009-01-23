@@ -9,13 +9,13 @@
  */
 
 /**
- * opGDataDocumentFeed
+ * opAtomPubDocumentFeed
  *
  * @package    OpenPNE
  * @subpackage api
  * @author     Kousuke Ebihara <ebihara@tejimaya.com>
  */
-class opGDataDocumentFeed extends opGDataDocument
+class opAtomPubDocumentFeed extends opAtomPubDocument
 {
   protected function getRootXMLString()
   {

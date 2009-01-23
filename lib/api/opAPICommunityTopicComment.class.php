@@ -61,7 +61,7 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
     $communityTopic = CommunityTopicPeer::retrieveByPk($communityTopicId);
 
     $input = file_get_contents('php://input');
-    $entry = new opGDataDocumentEntry($input, true);
+    $entry = new opAtomPubDocumentEntry($input, true);
     $elements = $entry->getElements();
 
     $comment = new CommunityTopicComment();
@@ -77,7 +77,7 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
   public function update()
   {
     $input = file_get_contents('php://input');
-    $entry = new opGDataDocumentEntry($input);
+    $entry = new opAtomPubDocumentEntry($input);
     $elements = $entry->getElements();
 
     $id = $this->getRequiredParameter('id');
@@ -118,7 +118,7 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
       $mailAddress = $member->getConfig('mobile_address');
     }
 
-    $entry = new opGDataDocumentEntry($entry);
+    $entry = new opAtomPubDocumentEntry($entry);
     $entry->setTitle($comment->getCommunityTopic()->getName());
     $entry->setContent($comment->getBody());
     $entry->setId(md5(CommunityTopicComment::PEER.$comment->getId()));

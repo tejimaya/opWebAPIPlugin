@@ -39,7 +39,7 @@ abstract class opAPI
     sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url'));
     $internalUri = sfContext::getInstance()->getRouting()->getCurrentInternalUri();
 
-    $feed = new opGDataDocumentFeed();
+    $feed = new opAtomPubDocumentFeed();
     $feed->setTitle($title.' - '.opConfig::get('sns_name'));
     $feed->setId(md5($internalUri));
     $feed->setLink(url_for($internalUri, true), 'self');

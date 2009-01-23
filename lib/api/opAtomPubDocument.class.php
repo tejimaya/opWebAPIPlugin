@@ -9,13 +9,13 @@
  */
 
 /**
- * opGDataDocument
+ * opAtomPubDocument
  *
  * @package    OpenPNE
  * @subpackage api
  * @author     Kousuke Ebihara <ebihara@tejimaya.com>
  */
-abstract class opGDataDocument
+abstract class opAtomPubDocument
 {
   protected $elements;
 

@@ -9,13 +9,13 @@
  */
 
 /**
- * opGDataDocumentEntry
+ * opAtomPubDocumentEntry
  *
  * @package    OpenPNE
  * @subpackage api
  * @author     Kousuke Ebihara <ebihara@tejimaya.com>
  */
-class opGDataDocumentEntry extends opGDataDocument
+class opAtomPubDocumentEntry extends opAtomPubDocument
 {
   protected $isInsert = false;
 
