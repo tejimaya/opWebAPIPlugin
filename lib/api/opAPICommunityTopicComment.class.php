@@ -48,21 +48,28 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
   {
     $id = $this->getRequiredParameter('id');
     $comment = CommunityTopicCommentPeer::retrieveByPk($id);
+    if (!$comment)
+    {
+      return false;
+    }
+
     $entry = $this->createEntryByInstance($comment);
     return $entry->publish();
   }
 
   public function insert()
   {
-    $memberId = $this->getRequiredParameter('member_id');
-    $member = MemberPeer::retrieveByPk($memberId);
-
+    $elements = $this->getEntryXMLFromRequestBody();
     $communityTopicId = $this->getRequiredParameter('topic_id');
-    $communityTopic = CommunityTopicPeer::retrieveByPk($communityTopicId);
 
-    $input = file_get_contents('php://input');
-    $entry = new opAtomPubDocumentEntry($input, true);
-    $elements = $entry->getElements();
+    $communityTopic = CommunityTopicPeer::retrieveByPk($communityTopicId);
+    $member = MemberPeer::retrieveByPk($elements->author->id);
+    if (!$communityTopic || !$member)
+    {
+      return false;
+    }
+
+    $elements = $this->getEntryXMLFromRequestBody();
 
     $comment = new CommunityTopicComment();
     $comment->setMember($member);
@@ -76,13 +83,11 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
 
   public function update()
   {
-    $input = file_get_contents('php://input');
-    $entry = new opAtomPubDocumentEntry($input);
-    $elements = $entry->getElements();
+    $elements = $this->getEntryXMLFromRequestBody();
 
     $id = $this->getRequiredParameter('id');
     $comment = CommunityTopicCommentPeer::retrieveByPk($id);
-    if (!$comment || $id != $elements->id)
+    if (!$comment || $this->generateEntryId($comment) != $elements->id)
     {
       return false;
     }

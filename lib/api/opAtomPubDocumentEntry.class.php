@@ -36,6 +36,12 @@ class opAtomPubDocumentEntry extends opAtomPubDocument
     }
   }
 
+  protected function getRootXMLString()
+  {
+    $string = '<entry xmlns="http://www.w3.org/2005/Atom"></entry>';
+    return $string;
+  }
+
   protected function validate($elements, $isCheckAuthor = false)
   {
     if ($isCheckAuthor)
@@ -69,21 +75,16 @@ class opAtomPubDocumentEntry extends opAtomPubDocument
     $this->getElements()->addChild('id', $id);
   }
 
-  public function setAuthor($name, $email)
+  public function setAuthor($name, $id)
   {
     $author = $this->getElements()->addChild('author');
     $author->addChild('name', $name);
-    $author->addChild('email', $email);
+    $author->addChild('id', $id);
   }
 
   public function setAuthorByMember(Member $member)
   {
-    $mailAddress = $member->getConfig('pc_address');
-    if (!$mailAddress)
-    {
-      $mailAddress = $member->getConfig('mobile_address');
-    }
-    $this->setAuthor($member->getName(), $mailAddress);
+    $this->setAuthor($member->getName(), $member->getId());
   }
 
   public function setPublished($published)

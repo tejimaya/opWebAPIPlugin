@@ -56,6 +56,12 @@ class opAtomPubDocumentFeed extends opAtomPubDocument
     return $elements;
   }
 
+  protected function getRootXMLString()
+  {
+    $string = '<feed xmlns="http://www.w3.org/2005/Atom"></feed>';
+    return $string;
+  }
+
   public function setTitle($title)
   {
     $this->getElements()->addChild('title', $title);

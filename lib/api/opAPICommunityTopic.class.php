@@ -48,21 +48,26 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
   {
     $id = $this->getRequiredParameter('id');
     $topic = CommunityTopicPeer::retrieveByPk($id);
+    if (!$topic)
+    {
+      return false;
+    }
+
     $entry = $this->createEntryByInstance($topic);
     return $entry->publish();
   }
 
   public function insert()
   {
-    $memberId = $this->getRequiredParameter('member_id');
-    $member = MemberPeer::retrieveByPk($memberId);
-
+    $elements = $this->getEntryXMLFromRequestBody();
     $communityId = $this->getRequiredParameter('community_id');
-    $community = CommunityPeer::retrieveByPk($communityId);
 
-    $input = file_get_contents('php://input');
-    $entry = new opAtomPubDocumentEntry($input, true);
-    $elements = $entry->getElements();
+    $community = CommunityPeer::retrieveByPk($communityId);
+    $member = MemberPeer::retrieveByPk($elements->author->id);
+    if (!$community || !$member)
+    {
+      return false;
+    }
 
     $topic = new CommunityTopic();
     $topic->setMember($member);
@@ -76,13 +81,12 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
 
   public function update()
   {
-    $input = file_get_contents('php://input');
-    $entry = new opAtomPubDocumentEntry($input);
-    $elements = $entry->getElements();
+    $elements = $this->getEntryXMLFromRequestBody();
 
     $id = $this->getRequiredParameter('id');
     $topic = CommunityTopicPeer::retrieveByPk($id);
-    if (!$topic || $id != $elements->id)
+
+    if (!$topic || $this->generateEntryId($topic) != $elements->id)
     {
       return false;
     }

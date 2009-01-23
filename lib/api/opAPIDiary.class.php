@@ -48,18 +48,23 @@ class opAPIDiary extends opAPI implements opAPIInterface
   {
     $id = $this->getRequiredParameter('id');
     $diary = DiaryPeer::retrieveByPk($id);
+    if (!$diary)
+    {
+      return false;
+    }
+
     $entry = $this->createEntryByInstance($diary);
     return $entry->publish();
   }
 
   public function insert()
   {
-    $memberId = $this->getRequiredParameter('member_id');
-    $member = MemberPeer::retrieveByPk($memberId);
-
-    $input = file_get_contents('php://input');
-    $entry = new opAtomPubDocumentEntry($input, true);
-    $elements = $entry->getElements();
+    $elements = $this->getEntryXMLFromRequestBody();
+    $member = MemberPeer::retrieveByPk($elements->author->id);
+    if (!$member)
+    {
+      return false;
+    }
 
     $diary = new Diary();
     $diary->setTitle($elements->title);
@@ -73,13 +78,11 @@ class opAPIDiary extends opAPI implements opAPIInterface
 
   public function update()
   {
-    $input = file_get_contents('php://input');
-    $entry = new opAtomPubDocumentEntry($input);
-    $elements = $entry->getElements();
+    $elements = $this->getEntryXMLFromRequestBody();
 
     $id = $this->getRequiredParameter('id');
     $diary = DiaryPeer::retrieveByPk($id);
-    if (!$diary || $id != $elements->id)
+    if (!$diary || $this->generateEntryId($diary) != $elements->id)
     {
       return false;
     }
