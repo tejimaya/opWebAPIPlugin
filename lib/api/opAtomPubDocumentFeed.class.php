@@ -17,14 +17,6 @@
  */
 class opAtomPubDocumentFeed extends opAtomPubDocument
 {
-  protected function getRootXMLString()
-  {
-    $string = '<feed xmlns="http://www.w3.org/2005/Atom" '
-            . 'xmlns:gd="http://schemas.google.com/g/2005"></feed>';
-
-    return $string;
-  }
-
   protected function validate($elements)
   {
     if (!isset($elements->author))

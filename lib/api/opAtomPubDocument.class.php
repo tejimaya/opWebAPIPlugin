@@ -43,7 +43,11 @@ abstract class opAtomPubDocument
     return $elements->asXML();
   }
 
-  abstract protected function getRootXMLString();
+  protected function getRootXMLString()
+  {
+    $string = '<entry xmlns="http://www.w3.org/2005/Atom"></entry>';
+    return $string;
+  }
 
   abstract protected function validate($elements);
 
