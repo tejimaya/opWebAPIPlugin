@@ -22,7 +22,7 @@ class feedsActions extends sfActions
     $list = SnsConfigPeer::get('op_web_api_plugin_ip_list', '127.0.0.1');
     $this->forward404Unless(in_array(@$_SERVER['REMOTE_ADDR'], explode("\n", $list)));
 
-    $this->getResponse()->setHttpHeader('Content-Type', 'text/xml');
+    $this->getResponse()->setHttpHeader('Content-Type', 'application/atom+xml');
 
     $request = sfContext::getInstance()->getRequest();
     $model = $request->getParameter('model');
