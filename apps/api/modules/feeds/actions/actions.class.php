@@ -69,7 +69,14 @@ class feedsActions extends sfActions
     $this->result = $this->api->insert($this->api->getEntryXMLFromRequestBody());
     $this->forward404Unless($this->result);
 
+    $params = array(
+      'model' => $request->getParameter('model'),
+      'id' => $this->result->getId(),
+    );
+    $url = $this->generateUrl('feeds_entry', $params, true);
+
     $this->getResponse()->setStatusCode(201);
+    $this->getResponse()->setHttpHeader('Location', $url);
     $entry = $this->api->createEntryByInstance($this->result);
     return $this->renderText($entry->publish());
   }
