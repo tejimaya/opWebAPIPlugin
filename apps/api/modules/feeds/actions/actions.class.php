@@ -55,7 +55,8 @@ class feedsActions extends sfActions
   {
     $this->result = $this->api->entry();
     $this->forward404Unless($this->result);
-    return $this->renderText($this->result);
+    $entry = $this->api->createEntryByInstance($this->result);
+    return $this->renderText($entry->publish());
   }
 
  /**
@@ -65,11 +66,12 @@ class feedsActions extends sfActions
   */
   public function executeInsertEntry($request)
   {
-    $this->result = $this->api->insert();
+    $this->result = $this->api->insert($this->api->getEntryXMLFromRequestBody());
     $this->forward404Unless($this->result);
 
     $this->getResponse()->setStatusCode(201);
-    return $this->renderText($this->result);
+    $entry = $this->api->createEntryByInstance($this->result);
+    return $this->renderText($entry->publish());
   }
 
  /**
@@ -79,9 +81,10 @@ class feedsActions extends sfActions
   */
   public function executeUpdateEntry($request)
   {
-    $this->result = $this->api->update();
+    $this->result = $this->api->update($this->api->getEntryXMLFromRequestBody());
     $this->forward404Unless($this->result);
-    return $this->renderText($this->result);
+    $entry = $this->api->createEntryByInstance($this->result);
+    return $this->renderText($entry->publish());
   }
 
  /**

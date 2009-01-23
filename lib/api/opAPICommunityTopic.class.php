@@ -48,22 +48,15 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
   {
     $id = $this->getRequiredParameter('id');
     $topic = CommunityTopicPeer::retrieveByPk($id);
-    if (!$topic)
-    {
-      return false;
-    }
-
-    $entry = $this->createEntryByInstance($topic);
-    return $entry->publish();
+    return $topic;
   }
 
-  public function insert()
+  public function insert(SimpleXMLElement $xml)
   {
-    $elements = $this->getEntryXMLFromRequestBody();
     $communityId = $this->getRequiredParameter('community_id');
 
     $community = CommunityPeer::retrieveByPk($communityId);
-    $member = MemberPeer::retrieveByPk($elements->author->id);
+    $member = MemberPeer::retrieveByPk($xml->author->id);
     if (!$community || !$member)
     {
       return false;
@@ -72,30 +65,26 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
     $topic = new CommunityTopic();
     $topic->setMember($member);
     $topic->setCommunity($community);
-    $topic->setName($elements->title);
+    $topic->setName($xml->title);
     $topic->save();
 
-    $responseEntry = $this->createEntryByInstance($topic);
-    return $responseEntry->publish();
+    return $topic;
   }
 
-  public function update()
+  public function update(SimpleXMLElement $xml)
   {
-    $elements = $this->getEntryXMLFromRequestBody();
-
     $id = $this->getRequiredParameter('id');
     $topic = CommunityTopicPeer::retrieveByPk($id);
 
-    if (!$topic || $this->generateEntryId($topic) != $elements->id)
+    if (!$topic || $this->generateEntryId($topic) != $xml->id)
     {
       return false;
     }
 
-    $topic->setName($elements->title);
+    $topic->setName($xml->title);
     $topic->save();
 
-    $responseEntry = $this->createEntryByInstance($topic);
-    return $responseEntry->publish();
+    return $topic;
   }
 
   public function delete()
@@ -111,7 +100,7 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
     return true;
   }
 
-  protected function createEntryByInstance(BaseObject $topic, SimpleXMLElement $entry = null)
+  public function createEntryByInstance(BaseObject $topic, SimpleXMLElement $entry = null)
   {
     $entry = parent::createEntryByInstance($topic, $entry);
     sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url', 'opUtil'));

@@ -48,51 +48,40 @@ class opAPIDiary extends opAPI implements opAPIInterface
   {
     $id = $this->getRequiredParameter('id');
     $diary = DiaryPeer::retrieveByPk($id);
-    if (!$diary)
-    {
-      return false;
-    }
-
-    $entry = $this->createEntryByInstance($diary);
-    return $entry->publish();
+    return $diary;
   }
 
-  public function insert()
+  public function insert(SimpleXMLElement $xml)
   {
-    $elements = $this->getEntryXMLFromRequestBody();
-    $member = MemberPeer::retrieveByPk($elements->author->id);
+    $member = MemberPeer::retrieveByPk($xml->author->id);
     if (!$member)
     {
       return false;
     }
 
     $diary = new Diary();
-    $diary->setTitle($elements->title);
-    $diary->setBody($elements->content);
+    $diary->setTitle($xml->title);
+    $diary->setBody($xml->content);
     $diary->setMember($member);
     $diary->save();
 
-    $responseEntry = $this->createEntryByInstance($diary);
-    return $responseEntry->publish();
+    return $diary;
   }
 
-  public function update()
+  public function update(SimpleXMLElement $xml)
   {
-    $elements = $this->getEntryXMLFromRequestBody();
-
     $id = $this->getRequiredParameter('id');
     $diary = DiaryPeer::retrieveByPk($id);
-    if (!$diary || $this->generateEntryId($diary) != $elements->id)
+    if (!$diary || $this->generateEntryId($diary) != $xml->id)
     {
       return false;
     }
 
-    $diary->setTitle($elements->title);
-    $diary->setBody($elements->content);
+    $diary->setTitle($xml->title);
+    $diary->setBody($xml->content);
     $diary->save();
 
-    $responseEntry = $this->createEntryByInstance($diary);
-    return $responseEntry->publish();
+    return $diary;
   }
 
   public function delete()
@@ -108,7 +97,7 @@ class opAPIDiary extends opAPI implements opAPIInterface
     return true;
   }
 
-  protected function createEntryByInstance(BaseObject $diary, SimpleXMLElement $entry = null)
+  public function createEntryByInstance(BaseObject $diary, SimpleXMLElement $entry = null)
   {
     $entry = parent::createEntryByInstance($diary, $entry);
     sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url', 'opUtil'));
