@@ -22,7 +22,7 @@ class opWebAPIPluginRouting
 
     $routes = array(
       'feeds_feed' => new sfRequestRoute(
-        '/feeds/:model/feed/*',
+        '/feeds/:model/collection/*',
         array('module' => 'feeds', 'action' => 'feedEntries'),
         array('sf_method' => array('get'))
       ),
@@ -34,7 +34,7 @@ class opWebAPIPluginRouting
       ),
 
       'feeds_insert_entry' => new sfRequestRoute(
-        '/feeds/:model/*',
+        '/feeds/:model/collection/*',
         array('module' => 'feeds', 'action' => 'insertEntry'),
         array('sf_method' => array('post'))
       ),
