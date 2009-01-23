@@ -119,7 +119,7 @@ class opAPIDiary extends opAPI implements opAPIInterface
     $entry = new opAtomPubDocumentEntry($entry);
     $entry->setTitle($diary->getTitle());
     $entry->setContent($diary->getBody());
-    $entry->setId(md5(Diary::PEER.$diary->getId()));
+    $entry->setId($this->generateEntryId($diary));
     $entry->setAuthor($member->getName(), $mailAddress);
     $entry->setPublished($diary->getCreatedAt());
     $entry->setUpdated($diary->getUpdatedAt());

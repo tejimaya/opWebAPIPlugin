@@ -120,7 +120,7 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
 
     $entry = new opAtomPubDocumentEntry($entry);
     $entry->setTitle($topic->getName());
-    $entry->setId(md5(CommunityTopic::PEER.$topic->getId()));
+    $entry->setId($this->generateEntryId($topic));
     $entry->setAuthor($topic->getName(), $mailAddress);
     $entry->setPublished($topic->getCreatedAt());
     $entry->setUpdated($topic->getUpdatedAt());

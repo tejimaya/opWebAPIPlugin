@@ -121,7 +121,7 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
     $entry = new opAtomPubDocumentEntry($entry);
     $entry->setTitle($comment->getCommunityTopic()->getName());
     $entry->setContent($comment->getBody());
-    $entry->setId(md5(CommunityTopicComment::PEER.$comment->getId()));
+    $entry->setId($this->generateEntryId($comment));
     $entry->setAuthor($member->getName(), $mailAddress);
     $entry->setPublished($comment->getCreatedAt());
     $entry->setUpdated($comment->getUpdatedAt());

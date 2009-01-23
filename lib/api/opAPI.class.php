@@ -58,4 +58,9 @@ abstract class opAPI
 
     return $result;
   }
+
+  public function generateEntryId($entry)
+  {
+    return md5(get_class($entry).$entry->getId());
+  }
 }
