@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.7.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+    http://pear.php.net/dtd/tasks-1.0.xsd
+    http://pear.php.net/dtd/package-2.0
+    http://pear.php.net/dtd/package-2.0.xsd">
+ <name>opWebAPIPlugin</name>
+ <channel>plugins.openpne.jp</channel>
+ <summary> </summary>
+ <description> </description>
+ <lead>
+  <name />
+  <user />
+  <email>maintainer@example.com</email>
+  <active>yes</active>
+ </lead>
+ <date>2009-01-27</date>
+ <time>05:39:34</time>
+ <version>
+  <release>0.10</release>
+  <api>0.10</api>
+ </version>
+ <stability>
+  <release>devel</release>
+  <api>devel</api>
+ </stability>
+ <license>Apache 2.0</license>
+ <notes>First release</notes>
+ <contents>
+  <dir baseinstalldir="/" name="/">
+   <file baseinstalldir="/" md5sum="940eac8f5cd16c94f465b81474471c14" name="apps/api/modules/feeds/actions/actions.class.php" role="php" />
+   <file baseinstalldir="/" md5sum="d41d8cd98f00b204e9800998ecf8427e" name="apps/api/modules/feeds/templates/indexSuccess.php" role="php" />
+   <file baseinstalldir="/" md5sum="c6fe16813b8d96dd19dd093aaeb2dbed" name="apps/pc_backend/modules/opWebAPIPlugin/actions/actions.class.php" role="php" />
+   <file baseinstalldir="/" md5sum="85cbe7ecd27285fc612b79bf066230fc" name="apps/pc_backend/modules/opWebAPIPlugin/lib/APIAllowIPConfigForm.class.php" role="php" />
+   <file baseinstalldir="/" md5sum="b790f7f59bb51dbaee22b323959b4d52" name="apps/pc_backend/modules/opWebAPIPlugin/templates/indexSuccess.php" role="php" />
+   <file baseinstalldir="/" md5sum="a2a1427eb5f7fc7e7b0b14c46e8f03c3" name="config/config.php" role="php" />
+   <file baseinstalldir="/" md5sum="9b253e95a616769f0cbd0fdc38fbf67e" name="lib/opWebAPIPluginRouting.class.php" role="php" />
+   <file baseinstalldir="/" md5sum="94795ea95fe744436403ae691941390c" name="lib/api/opAPI.class.php" role="php" />
+   <file baseinstalldir="/" md5sum="c4cee0fd7ae3c1c9e897ab8989d29b27" name="lib/api/opAPICommunityTopic.class.php" role="php" />
+   <file baseinstalldir="/" md5sum="da40cbe98d99b04fe978efcebbd9b66c" name="lib/api/opAPICommunityTopicComment.class.php" role="php" />
+   <file baseinstalldir="/" md5sum="6a317e1eb66e5e313430933afb9d95f5" name="lib/api/opAPIDiary.class.php" role="php" />
+   <file baseinstalldir="/" md5sum="a19cbef309a27f7b3094fdf0f7a9087d" name="lib/api/opAPIInterface.class.php" role="php" />
+   <file baseinstalldir="/" md5sum="f89be121c332ad337756f6f481c72a54" name="lib/api/opAtomPubDocument.class.php" role="php" />
+   <file baseinstalldir="/" md5sum="b6683661f836e31adde3917b1d9eeece" name="lib/api/opAtomPubDocumentEntry.class.php" role="php" />
+   <file baseinstalldir="/" md5sum="04957894bc45dd466de20e23807665cf" name="lib/api/opAtomPubDocumentFeed.class.php" role="php" />
+   <file baseinstalldir="/" md5sum="3b83ef96387f14655fc854ddc3c6bd57" name="LICENSE" role="data" />
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0</min>
+   </pearinstaller>
+   <package>
+    <name>symfony</name>
+    <channel>pear.symfony-project.com</channel>
+    <min>1.2.0</min>
+   </package>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
+  <release>
+   <version>
+    <release>0.10</release>
+    <api>0.10</api>
+   </version>
+   <stability>
+    <release>devel</release>
+    <api>devel</api>
+   </stability>
+   <date>2009-01-27</date>
+   <license>Apache 2.0</license>
+   <notes>First release</notes>
+  </release>
+ </changelog>
+</package>
