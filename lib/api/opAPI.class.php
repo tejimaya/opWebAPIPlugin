@@ -64,7 +64,7 @@ abstract class opAPI
     return get_class($entry).':'.$entry->getId();
   }
 
-  public function createEntryByInstance(BaseObject $obj, SimpleXMLElement $entry = null)
+  public function createEntryByInstance(Doctrine_Record $obj, SimpleXMLElement $entry = null)
   {
     $entry = new opAtomPubDocumentEntry($entry);
     $entry->setId($this->generateEntryId($obj));

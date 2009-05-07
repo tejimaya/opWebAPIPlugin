@@ -28,7 +28,7 @@ class APIAllowIPConfig extends sfForm
       'ip_list' => new sfValidatorCallback(array('callback' => array($this, 'validate'))),
     ));
 
-    $config = SnsConfigPeer::retrieveByName($this->configName);
+    $config = Doctrine::getTable('SnsConfig')->retrieveByName($this->configName);
     if ($config)
     {
       $this->getWidgetSchema()->setDefault('ip_list', $config->getValue());
@@ -39,7 +39,7 @@ class APIAllowIPConfig extends sfForm
 
   public function save()
   {
-    $config = SnsConfigPeer::retrieveByName($this->configName);
+    $config = Doctrine::getTable('SnsConfig')->retrieveByName($this->configName);
     if (!$config)
     {
       $config = new SnsConfig();

@@ -21,11 +21,11 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
   {
     if ($id = $this->getParameter('topic_id'))
     {
-      $communityTopicComment = CommunityTopicCommentPeer::retrieveByCommunityTopicId($id);
+      $communityTopicComment = Doctrine::getTable('CommunityTopicComment')->retrieveByCommunityTopicId($id);
     }
     else
     {
-      $communityTopicComment = CommunityTopicCommentPeer::doSelect(new Criteria());
+      $communityTopicComment = Doctrine::getTable('CommunityTopicComment')->doSelect(new Criteria());
     }
 
     if (!$communityTopicComment)
@@ -47,7 +47,7 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
   public function entry()
   {
     $id = $this->getRequiredParameter('id');
-    $comment = CommunityTopicCommentPeer::retrieveByPk($id);
+    $comment = Doctrine::getTable('CommunityTopicComment')->find($id);
     return $comment;
   }
 
@@ -55,8 +55,8 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
   {
     $communityTopicId = $this->getRequiredParameter('topic_id');
 
-    $communityTopic = CommunityTopicPeer::retrieveByPk($communityTopicId);
-    $member = MemberPeer::retrieveByPk($xml->author->id);
+    $communityTopic = Doctrine::getTable('CommunityTopic')->find($communityTopicId);
+    $member = Doctrine::getTable('Member')->find($xml->author->id);
     if (!$communityTopic || !$member)
     {
       return false;
@@ -74,7 +74,7 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
   public function update(SimpleXMLElement $xml)
   {
     $id = $this->getRequiredParameter('id');
-    $comment = CommunityTopicCommentPeer::retrieveByPk($id);
+    $comment = Doctrine::getTable('CommunityTopicComment')->find($id);
     if (!$comment || $this->generateEntryId($comment) != $xml->id)
     {
       return false;
@@ -89,7 +89,7 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
   public function delete()
   {
     $id = $this->getRequiredParameter('id');
-    $comment = CommunityTopicCommentPeer::retrieveByPk($id);
+    $comment = Doctrine::getTable('CommunityTopicComment')->find($id);
     if (!$comment)
     {
       return false;
@@ -99,7 +99,7 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
     return true;
   }
 
-  public function createEntryByInstance(BaseObject $comment, SimpleXMLElement $entry = null)
+  public function createEntryByInstance(Doctrine_Record $comment, SimpleXMLElement $entry = null)
   {
     $entry = parent::createEntryByInstance($comment, $entry);
     sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url', 'opUtil'));

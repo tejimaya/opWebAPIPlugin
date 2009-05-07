@@ -21,11 +21,11 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
   {
     if ($id = $this->getParameter('community_id'))
     {
-      $communityTopic = CommunityTopicPeer::retrieveByCommunityId($id);
+      $communityTopic = Doctrine::getTable('CommunityTopic')->retrieveByCommunityId($id);
     }
     else
     {
-      $communityTopic = CommunityTopicPeer::doSelect(new Criteria());
+      $communityTopic = Doctrine::getTable('CommunityTopic')->findAll();
     }
 
     if (!$communityTopic)
@@ -47,7 +47,7 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
   public function entry()
   {
     $id = $this->getRequiredParameter('id');
-    $topic = CommunityTopicPeer::retrieveByPk($id);
+    $topic = Doctrine::getTable('CommunityTopic')->find($id);
     return $topic;
   }
 
@@ -55,8 +55,8 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
   {
     $communityId = $this->getRequiredParameter('community_id');
 
-    $community = CommunityPeer::retrieveByPk($communityId);
-    $member = MemberPeer::retrieveByPk($xml->author->id);
+    $community = Doctrine::getTable('Community')->find($communityId);
+    $member = Doctrine::getTable('Member')->find($xml->author->id);
     if (!$community || !$member)
     {
       return false;
@@ -74,7 +74,7 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
   public function update(SimpleXMLElement $xml)
   {
     $id = $this->getRequiredParameter('id');
-    $topic = CommunityTopicPeer::retrieveByPk($id);
+    $topic = Doctrine::getTable('CommunityTopic')->find($id);
 
     if (!$topic || $this->generateEntryId($topic) != $xml->id)
     {
@@ -90,7 +90,7 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
   public function delete()
   {
     $id = $this->getRequiredParameter('id');
-    $topic = CommunityTopicPeer::retrieveByPk($id);
+    $topic = Doctrine::getTable('CommunityTopic')->find($id);
     if (!$topic)
     {
       return false;
@@ -100,7 +100,7 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
     return true;
   }
 
-  public function createEntryByInstance(BaseObject $topic, SimpleXMLElement $entry = null)
+  public function createEntryByInstance(Doctrine_Record $topic, SimpleXMLElement $entry = null)
   {
     $entry = parent::createEntryByInstance($topic, $entry);
     sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url', 'opUtil'));
