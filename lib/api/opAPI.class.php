@@ -17,16 +17,29 @@
  */
 abstract class opAPI
 {
-  protected $parameters = array();
+  protected
+    $parameters = array(),
+
+    $orderByTable = array(
+      'published' => 'created_at',
+      'updated'   => 'updated_at',
+    ),
+
+    $routeObject = null;
 
   public function __construct($parameters = array())
   {
     $this->parameters = $parameters;
   }
 
+  public function hasParameter($name)
+  {
+    return isset($this->parameters[$name]);
+  }
+
   public function getParameter($name, $default = null)
   {
-    if (!isset($this->parameters[$name]))
+    if (!$this->hasParameter($name))
     {
       return $default;
     }
@@ -80,4 +93,81 @@ abstract class opAPI
     $entry = new opAtomPubDocumentEntry($input, true);
     return $entry->getElements();
   }
+
+  public function setRouteObject($object)
+  {
+    $this->routeObject = $object;
+  }
+
+  public function getRouteObject()
+  {
+    return $this->routeObject;
+  }
+
+  public function setOffsetAndLimitation()
+  {
+    $this->routeObject->limit($this->getParameter('max-results', 25));
+    $this->routeObject->offset($this->getParameter('max-results', 1) - 1);
+
+    return $this;
+  }
+
+  public function setOrderBy()
+  {
+    $rawOrderby = $this->getParameter('orderby', 'published');
+    if (!isset($this->orderByTable[$rawOrderby]))
+    {
+      return $this;
+    }
+
+    $orderby = $this->orderByTable[$rawOrderby];
+
+    if ('ascend' === $this->getParameter('sortorder'))
+    {
+      $sortorder = 'ASC';
+    }
+    else
+    {
+      $sortorder = 'DESC';
+    }
+
+    $this->routeObject->orderby($orderby.' '.$sortorder);
+
+    return $this;
+  }
+
+  public function addConditionPublished()
+  {
+    if ($this->hasParameter('published-min'))
+    {
+      $publishedMin = $this->getParameter('published-min');
+      $this->routeObject->andWhere('created_at >= ?', date('Y-m-d H:i:s', strtotime($publishedMin)));
+    }
+
+    if ($this->hasParameter('published-max'))
+    {
+      $publishedMax = $this->getParameter('published-max');
+      $this->routeObject->andWhere('created_at < ?', date('Y-m-d H:i:s', strtotime($publishedMax)));
+    }
+
+    return $this;
+  }
+
+  public function addConditionUpdated()
+  {
+    if ($this->hasParameter('updated-min'))
+    {
+      $updatedMin = $this->getParameter('updated-min');
+      $this->routeObject->andWhere('updated_at >= ?', date('Y-m-d H:i:s', strtotime($updatedMin)));
+    }
+
+    if ($this->hasParameter('updated-max'))
+    {
+      $updatedMax = $this->getParameter('updated-max');
+      $this->routeObject->andWhere('updated_at < ?', date('Y-m-d H:i:s', strtotime($updatedMax)));
+    }
+
+    return $this;
+  }
+
 }

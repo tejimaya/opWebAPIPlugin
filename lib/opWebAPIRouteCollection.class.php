@@ -16,41 +16,37 @@
  */
 class opWebAPIRouteCollection extends sfRouteCollection
 {
-  const
-    URI_TYPE_COLLECTION = 'collection',
-    URI_TYPE_MEMBER = 'member';
-
   protected
     $collectionUriRule = '/feeds/:model',
     $memberUriRule = '/feeds/:model/:id',
 
     $templates = array(
       'retrieve_feed' => array(
-        'uriType' => self::URI_TYPE_COLLECTION,
+        'uriType' => opWebAPIRoute::URI_TYPE_COLLECTION,
         'action'  => 'feedEntries',
         'method'  => 'get',
       ),
 
       'retrieve_resource' => array(
-        'uriType' => self::URI_TYPE_MEMBER,
+        'uriType' => opWebAPIRoute::URI_TYPE_MEMBER,
         'action'  => 'retrieveEntry',
         'method'  => 'get',
       ),
 
       'insert_resource' => array(
-        'uriType' => self::URI_TYPE_COLLECTION,
+        'uriType' => opWebAPIRoute::URI_TYPE_COLLECTION,
         'action'  => 'insertEntry',
         'method'  => 'post',
       ),
 
       'update_resource' => array(
-        'uriType' => self::URI_TYPE_MEMBER,
+        'uriType' => opWebAPIRoute::URI_TYPE_MEMBER,
         'action'  => 'updateEntry',
         'method'  => 'put',
       ),
 
       'delete_resource' => array(
-        'uriType' => self::URI_TYPE_MEMBER,
+        'uriType' => opWebAPIRoute::URI_TYPE_MEMBER,
         'action'  => 'updateEntry',
         'method'  => 'delete',
       ),
@@ -92,11 +88,10 @@ class opWebAPIRouteCollection extends sfRouteCollection
       $uris = array();
       $action = array('module' => 'feeds', 'action' => $template['action']);
       $requirements = array('model' => $model);
-      $routeOption = array('model' => $model);
+      $routeOption = array('model' => ucfirst($model), 'type' => 'object', 'uriType' => $template['uriType']);
 
-      if ($template['uriType'] === self::URI_TYPE_COLLECTION)
+      if ($template['uriType'] === opWebAPIRoute::URI_TYPE_COLLECTION)
       {
-        $routeOption['type'] = 'list';
         $uri = $this->collectionUriRule;
         if ($parentModel)
         {
@@ -108,7 +103,6 @@ class opWebAPIRouteCollection extends sfRouteCollection
       }
       else
       {
-        $routeOption['type'] = 'object';
         $uris['normal'] = $this->memberUriRule;
       }
 

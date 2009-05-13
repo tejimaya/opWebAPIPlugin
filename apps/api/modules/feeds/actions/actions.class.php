@@ -32,6 +32,8 @@ class feedsActions extends sfActions
 
     $params = $request->getParameterHolder()->getAll();
     $this->api = new $className($params);
+
+    $this->api->setRouteObject($this->getRoute()->getObject());
   }
 
  /**

@@ -19,36 +19,32 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
 {
   public function feed()
   {
-    if ($id = $this->getParameter('community_id'))
-    {
-      $communityTopic = Doctrine::getTable('CommunityTopic')->retrieveByCommunityId($id);
-    }
-    else
-    {
-      $communityTopic = Doctrine::getTable('CommunityTopic')->findAll();
-    }
+    $this
+      ->addConditionPublished()
+      ->addConditionUpdated()
+      ->setOrderBy()
+      ->setOffsetAndLimitation();
 
-    if (!$communityTopic)
+    $communityTopicList = $this->getRouteObject()->execute();
+    if (!$communityTopicList->count())
     {
       return false;
     }
 
     $feed = $this->getGeneralFeed('CommunityTopics');
-    foreach ($communityTopic as $topic)
+    foreach ($communityTopicList as $key => $topic)
     {
       $entry = $feed->addEntry();
       $this->createEntryByInstance($topic, $entry);
     }
-    $feed->setUpdated($communityTopic[0]->getCreatedAt());
+    $feed->setUpdated($communityTopicList->getFirst()->getCreatedAt());
 
     return $feed->publish();
   }
 
   public function entry()
   {
-    $id = $this->getRequiredParameter('id');
-    $topic = Doctrine::getTable('CommunityTopic')->find($id);
-    return $topic;
+    return $this->getRouteObject()->fetchOne();
   }
 
   public function insert(SimpleXMLElement $xml)
@@ -73,9 +69,7 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
 
   public function update(SimpleXMLElement $xml)
   {
-    $id = $this->getRequiredParameter('id');
-    $topic = Doctrine::getTable('CommunityTopic')->find($id);
-
+    $topic = $this->getRouteObject()->fetchOne();
     if (!$topic || $this->generateEntryId($topic) != $xml->id)
     {
       return false;
@@ -89,8 +83,7 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
 
   public function delete()
   {
-    $id = $this->getRequiredParameter('id');
-    $topic = Doctrine::getTable('CommunityTopic')->find($id);
+    $topic = $this->getRouteObject()->fetchOne();
     if (!$topic)
     {
       return false;

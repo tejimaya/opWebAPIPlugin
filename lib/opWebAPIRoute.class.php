@@ -16,15 +16,19 @@
  */
 class opWebAPIRoute extends sfObjectRoute
 {
+  const
+    URI_TYPE_COLLECTION = 'collection',
+    URI_TYPE_MEMBER = 'member';
+
   protected function getObjectForParameters($parameters)
   {
     $query = Doctrine::getTable($this->options['model'])->createQuery();
 
-    if ('object' === $this->options['type'])
+    if (self::URI_TYPE_MEMBER === $this->options['uriType'])
     {
       return $query->where('id = ?', $parameters['id']);
     }
-    elseif ('list' === $this->options['type'] && isset($parameters['parent_model']))
+    elseif (self::URI_TYPE_COLLECTION === $this->options['uriType'] && isset($parameters['parent_model']))
     {
       return $query->where($parameters['parent_model'].'_id = ?', $parameters['parent_id']);
     }
