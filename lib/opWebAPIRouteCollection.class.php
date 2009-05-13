@@ -68,6 +68,7 @@ class opWebAPIRouteCollection extends sfRouteCollection
       throw new InvalidArgumentException('You must pass a "model" option.');
     }
 
+    $options['name'] = $options['model'];
     parent::__construct($options);
 
     $this->generateRoutes();
@@ -89,7 +90,7 @@ class opWebAPIRouteCollection extends sfRouteCollection
     foreach ($this->templates as $name => $template)
     {
       $uris = array();
-      $action = array('feeds', $template['action']);
+      $action = array('module' => 'feeds', 'action' => $template['action']);
       $requirements = array('model' => $model);
       $routeOption = array('model' => $model);
 

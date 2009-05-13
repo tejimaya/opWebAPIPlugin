@@ -21,35 +21,9 @@ class opWebAPIPluginRouting
     $routing = $event->getSubject();
 
     $routes = array(
-      'feeds_feed' => new sfRequestRoute(
-        '/feeds/:model/collection/*',
-        array('module' => 'feeds', 'action' => 'feedEntries'),
-        array('sf_method' => array('get'))
-      ),
-
-      'feeds_entry' => new sfRequestRoute(
-        '/feeds/:model/id/:id',
-        array('module' => 'feeds', 'action' => 'retrieveEntry'),
-        array('sf_method' => array('get'))
-      ),
-
-      'feeds_insert_entry' => new sfRequestRoute(
-        '/feeds/:model/collection/*',
-        array('module' => 'feeds', 'action' => 'insertEntry'),
-        array('sf_method' => array('post'))
-      ),
-
-      'feeds_update_entry' => new sfRequestRoute(
-        '/feeds/:model/id/:id/*',
-        array('module' => 'feeds', 'action' => 'updateEntry'),
-        array('sf_method' => array('put'))
-      ),
-
-      'feeds_delete_entry' => new sfRequestRoute(
-        '/feeds/:model/id/:id/*',
-        array('module' => 'feeds', 'action' => 'deleteEntry'),
-        array('sf_method' => array('delete'))
-      ),
+      'diary'                 => new opWebAPIRouteCollection(array('model' => 'diary')),
+      'communityTopic'        => new opWebAPIRouteCollection(array('model' => 'communityTopic', 'parent_model' => 'community')),
+      'communityTopicComment' => new opWebAPIRouteCollection(array('model' => 'communityTopicComment', 'parent_model' => 'communityTopic')),
 
       'feeds_nodefaults' => new sfRoute(
         '/feeds/*',

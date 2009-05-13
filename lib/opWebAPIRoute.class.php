@@ -29,8 +29,4 @@ class opWebAPIRoute extends sfObjectRoute
       return $query->where($parameters['parent_model'].'_id = ?', $parameters['parent_id']);
     }
   }
-
-  protected function doConvertObjectToArray($object)
-  {
-  }
 }
