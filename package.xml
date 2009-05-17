@@ -14,7 +14,7 @@
   <active>yes</active>
  </lead>
  <date>2009-05-17</date>
- <time>09:07:01</time>
+ <time>08:57:15</time>
  <version>
   <release>0.3.0</release>
   <api>0.3.0</api>
@@ -70,16 +70,16 @@
  <changelog>
   <release>
    <version>
-    <release>0.1.0</release>
-    <api>0.1.0</api>
+    <release>0.3.0</release>
+    <api>0.3.0</api>
    </version>
    <stability>
-    <release>devel</release>
-    <api>devel</api>
+    <release>beta</release>
+    <api>beta</api>
    </stability>
-   <date>2009-02-05</date>
-   <license>Apache</license>
-   <notes>First release</notes>
+   <date>2009-05-17</date>
+   <license>apache</license>
+   <notes>This plugin is now compatible with Doctrine, and this is starting compatible with GData now.</notes>
   </release>
   <release>
    <version>
