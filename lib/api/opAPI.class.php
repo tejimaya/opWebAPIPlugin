@@ -170,4 +170,32 @@ abstract class opAPI
     return $this;
   }
 
+  public function addConditionAuthor()
+  {
+    if ($this->hasParameter('author'))
+    {
+      $author = $this->getParameter('author');
+      $memberId = $this->getMemberIdByUrl($author);
+      $this->routeObject->andWhere('member_id = ?', $memberId);
+    }
+
+    return $this;
+  }
+
+  public function getMemberIdByUrl($url)
+  {
+    $result = '';
+
+    $path = parse_url($url, 'path');
+    if ($path)
+    {
+      $pieces = array_reverse(explode('/', $path));
+      if (isset($pieces[1]) && 'member' === $pieces[1])
+      {
+        $result = (int)array_pop($pieces);
+      }
+    }
+
+    return $result;
+  }
 }

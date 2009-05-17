@@ -108,7 +108,7 @@ class opWebAPIRouteCollection extends sfRouteCollection
 
       foreach ($uris as $key => $value)
       {
-        $this->routes[$prefix.'_'.$name.'_'.$key] = new opWebAPIRoute(
+        $this->routes[$prefix.$name.'_'.$key] = new opWebAPIRoute(
           $value,
           $action,
           $requirements,
