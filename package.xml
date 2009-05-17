@@ -13,36 +13,42 @@
   <email />
   <active>yes</active>
  </lead>
- <date>2009-02-05</date>
- <time>07:31:36</time>
+ <date>2009-05-17</date>
+ <time>09:07:01</time>
  <version>
-  <release>0.1.0</release>
-  <api>0.1.0</api>
+  <release>0.3.0</release>
+  <api>0.3.0</api>
  </version>
  <stability>
-  <release>devel</release>
-  <api>devel</api>
+  <release>beta</release>
+  <api>beta</api>
  </stability>
- <license>Apache</license>
- <notes>First release</notes>
+ <license>apache</license>
+ <notes>This plugin is now compatible with Doctrine, and this is starting compatible with GData now.</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="940eac8f5cd16c94f465b81474471c14" name="apps/api/modules/feeds/actions/actions.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="f31ead2018f3bed2fa837311b25f954f" name="apps/api/modules/feeds/actions/actions.class.php" role="data" />
    <file baseinstalldir="/" md5sum="d41d8cd98f00b204e9800998ecf8427e" name="apps/api/modules/feeds/templates/indexSuccess.php" role="data" />
    <file baseinstalldir="/" md5sum="c6fe16813b8d96dd19dd093aaeb2dbed" name="apps/pc_backend/modules/opWebAPIPlugin/actions/actions.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="85cbe7ecd27285fc612b79bf066230fc" name="apps/pc_backend/modules/opWebAPIPlugin/lib/APIAllowIPConfigForm.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="37e4eb30544da940467ae7e4f06f1dae" name="apps/pc_backend/modules/opWebAPIPlugin/lib/APIAllowIPConfigForm.class.php" role="data" />
    <file baseinstalldir="/" md5sum="b790f7f59bb51dbaee22b323959b4d52" name="apps/pc_backend/modules/opWebAPIPlugin/templates/indexSuccess.php" role="data" />
    <file baseinstalldir="/" md5sum="a2a1427eb5f7fc7e7b0b14c46e8f03c3" name="config/config.php" role="data" />
-   <file baseinstalldir="/" md5sum="9b253e95a616769f0cbd0fdc38fbf67e" name="lib/opWebAPIPluginRouting.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="94795ea95fe744436403ae691941390c" name="lib/api/opAPI.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="c4cee0fd7ae3c1c9e897ab8989d29b27" name="lib/api/opAPICommunityTopic.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="da40cbe98d99b04fe978efcebbd9b66c" name="lib/api/opAPICommunityTopicComment.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="6a317e1eb66e5e313430933afb9d95f5" name="lib/api/opAPIDiary.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="4683c52d760809f12331a7426c990b1a" name="lib/opWebAPIPluginRouting.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="7979d6ec075ea44ad566f74d6dc10c72" name="lib/opWebAPIRoute.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="96ae045785435abcc443e28e1be76c51" name="lib/opWebAPIRouteCollection.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="193b40345a8672f93c900c60b320fcf2" name="lib/api/opAPI.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="036cde463221dfacf903c42fdbda346d" name="lib/api/opAPICommunityTopic.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="efe20f480f0331ef8aa74265d1cb179f" name="lib/api/opAPICommunityTopicComment.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="3bf48ced668305f13ce1d9c5109ac512" name="lib/api/opAPIDiary.class.php" role="data" />
    <file baseinstalldir="/" md5sum="a19cbef309a27f7b3094fdf0f7a9087d" name="lib/api/opAPIInterface.class.php" role="data" />
    <file baseinstalldir="/" md5sum="f89be121c332ad337756f6f481c72a54" name="lib/api/opAtomPubDocument.class.php" role="data" />
    <file baseinstalldir="/" md5sum="b6683661f836e31adde3917b1d9eeece" name="lib/api/opAtomPubDocumentEntry.class.php" role="data" />
    <file baseinstalldir="/" md5sum="04957894bc45dd466de20e23807665cf" name="lib/api/opAtomPubDocumentFeed.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="8b730df6dcd22086c80c3563a3da4ca0" name="lib/api/opGDataDocument.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="f6a656ce1bdc13c075aa6c69503ba766" name="lib/api/opGDataDocumentEntry.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="813a8c8aa5bfea5ef18891fe066bd791" name="lib/api/opGDataDocumentFeed.class.php" role="data" />
    <file baseinstalldir="/" md5sum="3b83ef96387f14655fc854ddc3c6bd57" name="LICENSE" role="data" />
+   <file baseinstalldir="/" md5sum="a629a04ed5ba7b917ef638d94ab27fb7" name="tags" role="data" />
   </dir>
  </contents>
  <dependencies>
@@ -74,6 +80,19 @@
    <date>2009-02-05</date>
    <license>Apache</license>
    <notes>First release</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.3.0</release>
+    <api>0.3.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2009-05-17</date>
+   <license>apache</license>
+   <notes>This plugin is now compatible with Doctrine, and this is starting compatible with GData now.</notes>
   </release>
  </changelog>
 </package>
