@@ -39,32 +39,13 @@ abstract class opGDataDocument
   public function publish()
   {
     $elements = $this->getElements();
-    $elements = $this->validate($elements);
     return $elements->asXML();
   }
 
   abstract protected function getRootXMLString();
 
-  abstract protected function validate($elements);
-
   public function getElements()
   {
     return $this->elements;
-  }
-
-  public function validateRequiredUniqueElement($element, $name)
-  {
-    if (1 != count($element->$name))
-    {
-      throw new LogicException('feed elements MUST contain exactly one "'.$name.'" element.');
-    }
-  }
-
-  public function validateUniqueElement($element, $name)
-  {
-    if (2 <= count($element->$name))
-    {
-      throw new LogicException('feed elements MUST NOT contain more than one "'.$name.'" element.');
-    }
   }
 }

@@ -31,7 +31,7 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
       return false;
     }
 
-    $feed = $this->getGeneralFeed('CommunityTopics');
+    $feed = $this->getGeneralFeed('CommunityTopics', $communityTopicList->count());
     foreach ($communityTopicList as $key => $topic)
     {
       $entry = $feed->addEntry();

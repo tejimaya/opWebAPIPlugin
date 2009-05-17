@@ -47,15 +47,23 @@ abstract class opAPI
     return $this->parameters[$name];
   }
 
-  public function getGeneralFeed($title)
+  public function getGeneralFeed($title, $totalCount = 0)
   {
     sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url'));
     $internalUri = sfContext::getInstance()->getRouting()->getCurrentInternalUri();
 
-    $feed = new opAtomPubDocumentFeed();
+    $feed = new opGDataDocumentFeed();
     $feed->setTitle($title.' - '.opConfig::get('sns_name'));
     $feed->setId(md5($internalUri));
     $feed->setLink(url_for($internalUri, true), 'self');
+    $feed->setLink(url_for($internalUri, true), 'http://schemas.google.com/g/2005#feed', 'application/atom+xml');
+
+    if ($totalCount)
+    {
+      $offsets = $this->routeObject->getDqlPart('offset');
+      $limits = $this->routeObject->getDqlPart('limit');
+      $feed->setOpenSearch($totalCount, array_shift($offsets) + 1, array_shift($limits));
+    }
 
     return $feed;
   }
