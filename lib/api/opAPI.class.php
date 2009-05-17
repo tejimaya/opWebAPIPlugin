@@ -87,7 +87,7 @@ abstract class opAPI
 
   public function createEntryByInstance(Doctrine_Record $obj, SimpleXMLElement $entry = null)
   {
-    $entry = new opAtomPubDocumentEntry($entry);
+    $entry = new opGDataDocumentEntry($entry);
     $entry->setId($this->generateEntryId($obj));
     $entry->setPublished($obj->getCreatedAt());
     $entry->setUpdated($obj->getUpdatedAt());
@@ -98,7 +98,7 @@ abstract class opAPI
   public function getEntryXMLFromRequestBody()
   {
     $input = file_get_contents('php://input');
-    $entry = new opAtomPubDocumentEntry($input, true);
+    $entry = new opGDataDocumentEntry($input, true);
     return $entry->getElements();
   }
 
