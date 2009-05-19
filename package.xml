@@ -48,7 +48,6 @@
    <file baseinstalldir="/" md5sum="f6a656ce1bdc13c075aa6c69503ba766" name="lib/api/opGDataDocumentEntry.class.php" role="data" />
    <file baseinstalldir="/" md5sum="813a8c8aa5bfea5ef18891fe066bd791" name="lib/api/opGDataDocumentFeed.class.php" role="data" />
    <file baseinstalldir="/" md5sum="3b83ef96387f14655fc854ddc3c6bd57" name="LICENSE" role="data" />
-   <file baseinstalldir="/" md5sum="a629a04ed5ba7b917ef638d94ab27fb7" name="tags" role="data" />
   </dir>
  </contents>
  <dependencies>
