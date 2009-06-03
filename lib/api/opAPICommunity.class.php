@@ -44,7 +44,7 @@ class opAPICommunity extends opAPI implements opAPIInterface
 
   public function entry()
   {
-    return false;
+    return $this->getRouteObject()->fetchOne();
   }
 
   public function insert(SimpleXMLElement $xml)
