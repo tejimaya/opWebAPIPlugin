@@ -19,6 +19,8 @@ abstract class opGDataDocument
 {
   protected $elements;
 
+  const XML_DECLARATION = '<?xml version="1.0" encoding="UTF-8"?>';
+
   public function __construct($input = '')
   {
     if ($input)

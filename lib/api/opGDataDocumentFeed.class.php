@@ -19,7 +19,7 @@ class opGDataDocumentFeed extends opGDataDocument
 {
   protected function getRootXMLString()
   {
-    $string = '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/"></feed>';
+    $string = self::XML_DECLARATION.'<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/"></feed>';
     return $string;
   }
 
