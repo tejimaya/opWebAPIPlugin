@@ -49,7 +49,29 @@ class opAPICommunity extends opAPI implements opAPIInterface
 
   public function insert(SimpleXMLElement $xml)
   {
-    return false;
+    $member = Doctrine::getTable('Member')->find($this->getMemberIdByUrl((string)$xml->author->uri));
+    if (!$member)
+    {
+      return false;
+    }
+
+    $community = new Community();
+    $community->setName((string)$xml->title);
+    $community->save();
+
+    $admin = new CommunityMember();
+    $admin->setPosition('admin');
+    $admin->setMember($member);
+    $admin->setCommunity($community);
+    $admin->save();
+
+    $config = new CommunityConfig();
+    $config->setName('description');
+    $config->setValue((string)$xml->content);
+    $config->setCommunity($community);
+    $config->save();
+
+    return $community;
   }
 
   public function update(SimpleXMLElement $xml)
