@@ -75,7 +75,7 @@ class feedsActions extends sfActions
       'model' => $request->getParameter('model'),
       'id' => $this->result->getId(),
     );
-    $url = $this->generateUrl('feeds_entry', $params, true);
+    $url = $this->generateUrl('feeds_community_retrieve_resource_normal', $params, true);
 
     $this->getResponse()->setStatusCode(201);
     $this->getResponse()->setHttpHeader('Location', $url);

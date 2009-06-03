@@ -199,10 +199,10 @@ abstract class opAPI
   {
     $result = '';
 
-    $path = parse_url($url, 'path');
+    $path = parse_url($url, PHP_URL_PATH);
     if ($path)
     {
-      $pieces = array_reverse(explode('/', $path));
+      $pieces = explode('/', $path);
       if (isset($pieces[1]) && 'member' === $pieces[1])
       {
         $result = (int)array_pop($pieces);

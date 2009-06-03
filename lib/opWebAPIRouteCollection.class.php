@@ -87,7 +87,7 @@ class opWebAPIRouteCollection extends sfRouteCollection
     {
       $uris = array();
       $action = array('module' => 'feeds', 'action' => $template['action']);
-      $requirements = array('model' => $model);
+      $requirements = array('model' => $model, 'sf_method' => $template['method']);
       $routeOption = array('model' => ucfirst($model), 'type' => 'object', 'uriType' => $template['uriType']);
 
       if ($template['uriType'] === opWebAPIRoute::URI_TYPE_COLLECTION)

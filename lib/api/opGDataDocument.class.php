@@ -30,7 +30,7 @@ abstract class opGDataDocument
       {
         throw new RuntimeException('The inputed data is not a valid XML.');
       }
-      $this->elements = $this->validate($xml);
+      $this->elements = $xml;
     }
     else
     {
