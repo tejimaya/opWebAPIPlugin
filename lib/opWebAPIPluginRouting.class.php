@@ -23,6 +23,7 @@ class opWebAPIPluginRouting
     $routes = array(
       'member'                => new opWebAPIRouteCollection(array('model' => 'member')),
       'diary'                 => new opWebAPIRouteCollection(array('model' => 'diary')),
+      'community'             => new opWebAPIRouteCollection(array('model' => 'community')),
       'communityTopic'        => new opWebAPIRouteCollection(array('model' => 'communityTopic', 'parent_model' => 'community')),
       'communityTopicComment' => new opWebAPIRouteCollection(array('model' => 'communityTopicComment', 'parent_model' => 'communityTopic')),
 
