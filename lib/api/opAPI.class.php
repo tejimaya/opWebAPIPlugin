@@ -115,7 +115,7 @@ abstract class opAPI
   public function setOffsetAndLimitation()
   {
     $this->routeObject->limit($this->getParameter('max-results', 25));
-    $this->routeObject->offset($this->getParameter('max-results', 1) - 1);
+    $this->routeObject->offset($this->getParameter('start', 1) - 1);
 
     return $this;
   }
