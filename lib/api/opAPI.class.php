@@ -19,6 +19,7 @@ abstract class opAPI
 {
   protected
     $parameters = array(),
+    $totalCount = 0,
 
     $orderByTable = array(
       'published' => 'created_at',
@@ -114,6 +115,10 @@ abstract class opAPI
 
   public function setOffsetAndLimitation()
   {
+    $q = clone $this->getRouteObject();
+    $this->totalCount = $q->select('COUNT(id)')->execute(array(), Doctrine::HYDRATE_SINGLE_SCALAR);
+    $this->getRouteObject()->setHydrationMode(Doctrine::HYDRATE_RECORD);
+
     $this->routeObject->limit($this->getParameter('max-results', 25));
     $this->routeObject->offset($this->getParameter('start', 1) - 1);
 
@@ -205,5 +210,10 @@ abstract class opAPI
     }
 
     return $result;
+  }
+
+  public function getTotalCount()
+  {
+    return $this->totalCount;
   }
 }

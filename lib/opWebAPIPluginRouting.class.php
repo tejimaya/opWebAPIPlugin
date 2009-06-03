@@ -21,6 +21,7 @@ class opWebAPIPluginRouting
     $routing = $event->getSubject();
 
     $routes = array(
+      'member'                => new opWebAPIRouteCollection(array('model' => 'member')),
       'diary'                 => new opWebAPIRouteCollection(array('model' => 'diary')),
       'communityTopic'        => new opWebAPIRouteCollection(array('model' => 'communityTopic', 'parent_model' => 'community')),
       'communityTopicComment' => new opWebAPIRouteCollection(array('model' => 'communityTopicComment', 'parent_model' => 'communityTopic')),
