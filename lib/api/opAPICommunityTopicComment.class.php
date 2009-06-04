@@ -53,19 +53,16 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
 
   public function insert(SimpleXMLElement $xml)
   {
-    $communityTopicId = $this->getRequiredParameter('topic_id');
-
-    $communityTopic = Doctrine::getTable('CommunityTopic')->find($communityTopicId);
-    $member = Doctrine::getTable('Member')->find($xml->author->id);
-    if (!$communityTopic || !$member)
+    $member = Doctrine::getTable('Member')->find($this->getMemberIdByUrl((string)$xml->author->uri));
+    if (!$member)
     {
       return false;
     }
 
     $comment = new CommunityTopicComment();
     $comment->setMember($member);
-    $comment->setCommunityTopic($communityTopic);
-    $comment->setBody($xml->content);
+    $comment->setCommunityTopic($this->getParentObject());
+    $comment->setBody((string)$xml->content);
     $comment->save();
 
     return $comment;

@@ -59,6 +59,6 @@ class opWebAPIRoute extends sfObjectRoute
       return $object;
     }
 
-    throw new sfError404Exception(sprintf('Unable to find the %s parent object with the following parameters "%s").', $this->options['parent_model'], str_replace("\n", '', var_export($this->filterParameters($this->parameters), true))));
+    throw new sfError404Exception(sprintf('Unable to find the %s parent object with the following parameters "%s").', $requirements['parent_model'], str_replace("\n", '', var_export($this->filterParameters($this->parameters), true))));
   }
 }
