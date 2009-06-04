@@ -25,13 +25,13 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
       ->setOrderBy()
       ->setOffsetAndLimitation();
 
-    $communityTopicList = $this->getRouteObject()->execute();
+    $communityTopicList = $this->getQuery()->execute();
     if (!$communityTopicList->count())
     {
       return false;
     }
 
-    $feed = $this->getGeneralFeed('CommunityTopics', $communityTopicList->count());
+    $feed = $this->getGeneralFeed($this->getParentObject()->getName(), $this->getTotalCount());
     foreach ($communityTopicList as $key => $topic)
     {
       $entry = $feed->addEntry();
@@ -93,13 +93,25 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
     return true;
   }
 
+  public function generateEntryId($entry)
+  {
+    sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url', 'opUtil'));
+
+    return app_url_for('pc_frontend', 'communityTopic/detail?id='.$entry->getId(), true);
+  }
+
   public function createEntryByInstance(Doctrine_Record $topic, SimpleXMLElement $entry = null)
   {
     $entry = parent::createEntryByInstance($topic, $entry);
     sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url', 'opUtil'));
+
     $entry->setTitle($topic->getName());
+    $entry->setContent($topic->getBody());
     $entry->setAuthorByMember($topic->getMember());
-    $entry->setLink(app_url_for('pc_frontend', 'communityTopic/detail?id='.$topic->getId(), true), 'self', 'alternate');
+
+    $entry->setLink(url_for('@feeds_community_topic_retrieve_resource_normal?model=communityTopic&id='.$topic->getId()), 'self', 'application/atom+xml');
+    $entry->setLink(app_url_for('pc_frontend', 'communityTopic/detail?id='.$topic->getId(), true), 'alternate', 'text/html');
+    $entry->setLink(app_url_for('mobile_frontend', 'communityTopic/detail?id='.$topic->getId(), true), 'alternate');
 
     return $entry;
   }
