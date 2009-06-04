@@ -32,7 +32,7 @@ class opWebAPIRoute extends sfObjectRoute
     }
     elseif (self::URI_TYPE_COLLECTION === $this->options['uriType'] && isset($parameters['parent_model']))
     {
-      return $query->where($parameters['parent_model'].'_id = ?', $parameters['parent_id']);
+      return $query->where(sfInflector::underscore($parameters['parent_model']).'_id = ?', $parameters['parent_id']);
     }
 
     return $query;
