@@ -47,7 +47,7 @@ class opWebAPIRouteCollection extends sfRouteCollection
 
       'delete_resource' => array(
         'uriType' => opWebAPIRoute::URI_TYPE_MEMBER,
-        'action'  => 'updateEntry',
+        'action'  => 'deleteEntry',
         'method'  => 'delete',
       ),
   );
