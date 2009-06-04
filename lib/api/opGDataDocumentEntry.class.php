@@ -56,12 +56,22 @@ class opGDataDocumentEntry extends opGDataDocument
   {
     $author = $this->getElements()->addChild('author');
     $author->addChild('name', $name);
-    $author->addChild('id', $id);
+    if (is_int($id))
+    {
+      $author->addChild('id', $id);
+    }
+    else
+    {
+      $author->addChild('uri', $id);
+    }
   }
 
   public function setAuthorByMember(Member $member)
   {
-    $this->setAuthor($member->getName(), $member->getId());
+    sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url', 'opUtil'));
+
+    $uri = url_for('@feeds_member_retrieve_resource_normal?model=member&id='.$member->getId(), true);
+    $this->setAuthor($member->getName(), $uri);
   }
 
   public function setPublished($published)
