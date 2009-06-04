@@ -94,7 +94,15 @@ class opAPICommunity extends opAPI implements opAPIInterface
 
   public function delete()
   {
-    return false;
+    $community = $this->getRouteObject()->fetchOne();
+    if (!$community)
+    {
+      return false;
+    }
+
+    $community->delete();
+
+    return true;
   }
 
   public function generateEntryId($entry)
