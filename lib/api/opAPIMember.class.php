@@ -72,7 +72,7 @@ class opAPIMember extends opAPI implements opAPIInterface
   public function createEntryByInstance(Doctrine_Record $member, SimpleXMLElement $entry = null)
   {
     $entry = parent::createEntryByInstance($member, $entry);
-    sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url', 'opUtil'));
+    sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url', 'opUtil', 'sfImage', 'Asset', 'Tag'));
     $entry->setTitle($member->getName());
 
     $content = $entry->getElements()->addChild('content');
@@ -89,6 +89,12 @@ class opAPIMember extends opAPI implements opAPIInterface
     $entry->setLink(url_for('@feeds_member_retrieve_resource_normal?model=member&id='.$member->getId()), 'self', 'application/atom+xml');
     $entry->setLink(app_url_for('pc_frontend', 'member/profile?id='.$member->getId(), true), 'alternate', 'text/html');
     $entry->setLink(app_url_for('mobile_frontend', 'member/profile?id='.$member->getId(), true), 'alternate');
+
+    $image = $member->getImage();
+    if ($image)
+    {
+      $entry->setLink(sf_image_path($member->getImageFileName(), array(), true), 'enclosure', $member->getImage()->getFile()->getType());
+    }
 
     return $entry;
   }
