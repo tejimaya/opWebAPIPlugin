@@ -110,7 +110,7 @@ class opWebAPIRouteCollection extends sfRouteCollection
       {
         $this->routes[$prefix.$name.'_'.$key] = new opWebAPIRoute(
           $value,
-          $action,
+          array_merge($action, array('sf_format' => 'atom')),
           $requirements,
           $routeOption
         );

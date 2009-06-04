@@ -28,11 +28,11 @@ class opWebAPIPluginRouting
       'communityTopic'        => new opWebAPIRouteCollection(array('model' => 'communityTopic', 'parent_model' => 'community')),
       'communityTopicComment' => new opWebAPIRouteCollection(array('model' => 'communityTopicComment', 'parent_model' => 'communityTopic')),
       'communityEvent'        => new opWebAPIRouteCollection(array('model' => 'communityEvent', 'parent_model' => 'community')),
-      'communityEventComment'        => new opWebAPIRouteCollection(array('model' => 'communityEventComment', 'parent_model' => 'communityEvent')),
+      'communityEventComment' => new opWebAPIRouteCollection(array('model' => 'communityEventComment', 'parent_model' => 'communityEvent')),
 
       'feeds_nodefaults' => new sfRoute(
         '/feeds/*',
-        array('module' => 'default', 'action' => 'error')
+        array('module' => 'default', 'action' => 'error', 'sf_format' => 'atom')
       ),
     );
 
