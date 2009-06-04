@@ -27,6 +27,7 @@ class opWebAPIPluginRouting
       'communityMember'       => new opWebAPIRouteCollection(array('model' => 'communityMember', 'parent_model' => 'community')),
       'communityTopic'        => new opWebAPIRouteCollection(array('model' => 'communityTopic', 'parent_model' => 'community')),
       'communityTopicComment' => new opWebAPIRouteCollection(array('model' => 'communityTopicComment', 'parent_model' => 'communityTopic')),
+      'communityEvent'        => new opWebAPIRouteCollection(array('model' => 'communityEvent', 'parent_model' => 'community')),
 
       'feeds_nodefaults' => new sfRoute(
         '/feeds/*',
