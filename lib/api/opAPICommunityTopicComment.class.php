@@ -44,9 +44,7 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
 
   public function entry()
   {
-    $id = $this->getRequiredParameter('id');
-    $comment = Doctrine::getTable('CommunityTopicComment')->find($id);
-    return $comment;
+    return $this->getRouteObject()->fetchOne();
   }
 
   public function insert(SimpleXMLElement $xml)
