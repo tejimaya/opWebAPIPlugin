@@ -76,7 +76,20 @@ class opAPICommunity extends opAPI implements opAPIInterface
 
   public function update(SimpleXMLElement $xml)
   {
-    return false;
+    $community = $this->getRouteObject()->fetchOne();
+    if (!$community)
+    {
+      return false;
+    }
+
+    $community->setName((string)$xml->title);
+    $community->save();
+
+    $config = Doctrine::getTable('CommunityConfig')->retrieveByNameAndCommunityId('description', $community->getId());
+    $config->setValue((string)$xml->content);
+    $config->save();
+
+    return $community;
   }
 
   public function delete()
