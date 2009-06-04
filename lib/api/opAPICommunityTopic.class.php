@@ -68,12 +68,14 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
   public function update(SimpleXMLElement $xml)
   {
     $topic = $this->getRouteObject()->fetchOne();
-    if (!$topic || $this->generateEntryId($topic) != $xml->id)
+    if (!$topic)
     {
       return false;
     }
 
     $topic->setName($xml->title);
+    $topic->setName((string)$xml->title);
+    $topic->setBody((string)$xml->content);
     $topic->save();
 
     return $topic;
