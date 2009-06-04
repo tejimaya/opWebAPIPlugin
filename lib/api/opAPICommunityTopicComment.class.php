@@ -73,17 +73,7 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
 
   public function update(SimpleXMLElement $xml)
   {
-    $id = $this->getRequiredParameter('id');
-    $comment = Doctrine::getTable('CommunityTopicComment')->find($id);
-    if (!$comment || $this->generateEntryId($comment) != $xml->id)
-    {
-      return false;
-    }
-
-    $comment->setBody($xml->content);
-    $comment->save();
-
-    return $comment;
+    return false;
   }
 
   public function delete()
