@@ -71,14 +71,14 @@ class opAPICommunityTopicComment extends opAPI implements opAPIInterface
 
   public function delete()
   {
-    $id = $this->getRequiredParameter('id');
-    $comment = Doctrine::getTable('CommunityTopicComment')->find($id);
+    $comment = $this->getRouteObject()->fetchOne();
     if (!$comment)
     {
       return false;
     }
 
     $comment->delete();
+
     return true;
   }
 
