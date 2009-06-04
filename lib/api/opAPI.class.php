@@ -26,11 +26,16 @@ abstract class opAPI
       'updated'   => 'updated_at',
     ),
 
-    $routeObject = null;
+    $query = null,
+    $object = null,
+    $parentObject = null;
 
-  public function __construct($parameters = array())
+  public function __construct($parameters = array(), $route)
   {
     $this->parameters = $parameters;
+
+    $this->query = $route->getObject();
+    $this->parentObject = $route->getParentObject();
   }
 
   public function hasParameter($name)
@@ -61,8 +66,8 @@ abstract class opAPI
 
     if ($totalCount)
     {
-      $offsets = $this->routeObject->getDqlPart('offset');
-      $limits = $this->routeObject->getDqlPart('limit');
+      $offsets = $this->query->getDqlPart('offset');
+      $limits = $this->query->getDqlPart('limit');
       $feed->setOpenSearch($totalCount, array_shift($offsets) + 1, array_shift($limits));
     }
 
@@ -103,24 +108,50 @@ abstract class opAPI
     return $entry->getElements();
   }
 
+ /**
+  * @deprecated
+  */
   public function setRouteObject($object)
   {
-    $this->routeObject = $object;
+    $this->query = $object;
   }
 
+ /**
+  * @deprecated
+  */
   public function getRouteObject()
   {
-    return $this->routeObject;
+    return $this->getQuery();
+  }
+
+  public function getQuery()
+  {
+    return $this->query;
+  }
+
+  public function getObject()
+  {
+    if ($this->object)
+    {
+      return $this->object;
+    }
+
+    return $this->getQuery()->fetchOne();
+  }
+
+  public function getParentObject()
+  {
+    return $this->parentObject;
   }
 
   public function setOffsetAndLimitation()
   {
-    $q = clone $this->getRouteObject();
+    $q = clone $this->getQuery();
     $this->totalCount = $q->select('COUNT(id)')->execute(array(), Doctrine::HYDRATE_SINGLE_SCALAR);
-    $this->getRouteObject()->setHydrationMode(Doctrine::HYDRATE_RECORD);
+    $this->getQuery()->setHydrationMode(Doctrine::HYDRATE_RECORD);
 
-    $this->routeObject->limit($this->getParameter('max-results', 25));
-    $this->routeObject->offset($this->getParameter('start', 1) - 1);
+    $this->query->limit($this->getParameter('max-results', 25));
+    $this->query->offset($this->getParameter('start', 1) - 1);
 
     return $this;
   }
@@ -144,7 +175,7 @@ abstract class opAPI
       $sortorder = 'DESC';
     }
 
-    $this->routeObject->orderby($orderby.' '.$sortorder);
+    $this->query->orderby($orderby.' '.$sortorder);
 
     return $this;
   }
@@ -154,13 +185,13 @@ abstract class opAPI
     if ($this->hasParameter('published-min'))
     {
       $publishedMin = $this->getParameter('published-min');
-      $this->routeObject->andWhere('created_at >= ?', date('Y-m-d H:i:s', strtotime($publishedMin)));
+      $this->query->andWhere('created_at >= ?', date('Y-m-d H:i:s', strtotime($publishedMin)));
     }
 
     if ($this->hasParameter('published-max'))
     {
       $publishedMax = $this->getParameter('published-max');
-      $this->routeObject->andWhere('created_at < ?', date('Y-m-d H:i:s', strtotime($publishedMax)));
+      $this->query->andWhere('created_at < ?', date('Y-m-d H:i:s', strtotime($publishedMax)));
     }
 
     return $this;
@@ -171,13 +202,13 @@ abstract class opAPI
     if ($this->hasParameter('updated-min'))
     {
       $updatedMin = $this->getParameter('updated-min');
-      $this->routeObject->andWhere('updated_at >= ?', date('Y-m-d H:i:s', strtotime($updatedMin)));
+      $this->query->andWhere('updated_at >= ?', date('Y-m-d H:i:s', strtotime($updatedMin)));
     }
 
     if ($this->hasParameter('updated-max'))
     {
       $updatedMax = $this->getParameter('updated-max');
-      $this->routeObject->andWhere('updated_at < ?', date('Y-m-d H:i:s', strtotime($updatedMax)));
+      $this->query->andWhere('updated_at < ?', date('Y-m-d H:i:s', strtotime($updatedMax)));
     }
 
     return $this;
@@ -189,7 +220,7 @@ abstract class opAPI
     {
       $author = $this->getParameter('author');
       $memberId = $this->getMemberIdByUrl($author);
-      $this->routeObject->andWhere('member_id = ?', $memberId);
+      $this->query->andWhere('member_id = ?', $memberId);
     }
 
     return $this;

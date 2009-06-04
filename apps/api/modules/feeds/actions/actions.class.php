@@ -31,9 +31,7 @@ class feedsActions extends sfActions
     $this->forward404Unless(class_exists($className));
 
     $params = $request->getParameterHolder()->getAll();
-    $this->api = new $className($params);
-
-    $this->api->setRouteObject($this->getRoute()->getObject());
+    $this->api = new $className($params, $this->getRoute());
   }
 
  /**

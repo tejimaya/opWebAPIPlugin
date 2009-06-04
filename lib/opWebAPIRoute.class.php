@@ -20,6 +20,8 @@ class opWebAPIRoute extends sfObjectRoute
     URI_TYPE_COLLECTION = 'collection',
     URI_TYPE_MEMBER = 'member';
 
+  protected $parentObject = false;
+
   protected function getObjectForParameters($parameters)
   {
     $query = Doctrine::getTable($this->options['model'])->createQuery();
@@ -34,5 +36,29 @@ class opWebAPIRoute extends sfObjectRoute
     }
 
     return $query;
+  }
+
+  public function getParentObject()
+  {
+    $requirements = $this->getRequirements();
+    if (!isset($requirements['parent_model']))
+    {
+      return false;
+    }
+
+    if (false !== $this->parentObject)
+    {
+      return $this->parentObject;
+    }
+
+    $object = Doctrine::getTable(ucfirst($this->parameters['parent_model']))->find($this->parameters['parent_id']);
+    if ($object)
+    {
+      $this->parentObject = $object;
+
+      return $object;
+    }
+
+    throw new sfError404Exception(sprintf('Unable to find the %s parent object with the following parameters "%s").', $this->options['parent_model'], str_replace("\n", '', var_export($this->filterParameters($this->parameters), true))));
   }
 }
