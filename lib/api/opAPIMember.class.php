@@ -17,9 +17,15 @@
  */
 class opAPIMember extends opAPI implements opAPIInterface
 {
+  public function getSearchableFields()
+  {
+    return array('name');
+  }
+
   public function feed()
   {
     $this
+      ->addConditionSearchQuery()
       ->addConditionPublished()
       ->addConditionUpdated()
       ->setOrderBy()

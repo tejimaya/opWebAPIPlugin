@@ -17,9 +17,15 @@
  */
 class opAPICommunityTopic extends opAPI implements opAPIInterface
 {
+  public function getSearchableFields()
+  {
+    return array('name', 'body');
+  }
+
   public function feed()
   {
     $this
+      ->addConditionSearchQuery()
       ->addConditionPublished()
       ->addConditionUpdated()
       ->setOrderBy()
