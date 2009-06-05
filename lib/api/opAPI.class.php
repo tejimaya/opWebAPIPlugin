@@ -226,6 +226,62 @@ abstract class opAPI
     return $this;
   }
 
+  public function getSearchableFields()
+  {
+    return array();
+  }
+
+  public function addConditionSearchQuery()
+  {
+    if (!$this->getSearchableFields())
+    {
+      return $this;
+    }
+
+    if ($this->hasParameter('q'))
+    {
+      $list = opToolkit::extractEnclosedStrings($this->getParameter('q'));
+
+      $token = strtok($list['base'], ' ');
+      while (false !== $token)
+      {
+        $isIgnore = false;
+        if ('-' === $token[0])
+        {
+          $token = substr($token, 1);
+          $isIgnore = true;
+        }
+
+        $queryString = '(';
+
+        foreach ($this->getSearchableFields() as $i => $field)
+        {
+          if ($i)
+          {
+            $queryString .= ' OR ';
+          }
+
+          $queryString .= $field;
+
+          if ($isIgnore)
+          {
+            $queryString .= ' NOT';
+          }
+
+          $queryString .= ' LIKE ?';
+        }
+
+        $queryString .= ')';
+
+        $this->query->andWhere($queryString, array_fill(0, count($this->getSearchableFields()), '%'.$token.'%'));
+
+        $token = strtok(' ');
+      }
+   }
+
+    return $this;
+  }
+
   public function getMemberIdByUrl($url)
   {
     $result = '';
