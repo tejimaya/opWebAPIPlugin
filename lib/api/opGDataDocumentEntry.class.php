@@ -38,7 +38,7 @@ class opGDataDocumentEntry extends opGDataDocument
 
   protected function getRootXMLString()
   {
-    $string = self::XML_DECLARATION.'<entry xmlns="http://www.w3.org/2005/Atom"></entry>';
+    $string = self::XML_DECLARATION.'<entry xmlns="http://www.w3.org/2005/Atom" xmlns:gd="'.self::NAMESPACE.'"></entry>';
     return $string;
   }
 
