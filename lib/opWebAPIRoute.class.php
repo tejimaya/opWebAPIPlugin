@@ -61,4 +61,25 @@ class opWebAPIRoute extends sfObjectRoute
 
     throw new sfError404Exception(sprintf('Unable to find the %s parent object with the following parameters "%s").', $requirements['parent_model'], str_replace("\n", '', var_export($this->filterParameters($this->parameters), true))));
   }
+
+  protected function parseStarParameter($star)
+  {
+    $include = array();
+    $exclude = array();
+
+    $categories = explode('/', $star);
+    foreach ($categories as $category)
+    {
+      if ('-' === $category[0])
+      {
+        $exclude[] = substr($category, 1);
+      }
+      else
+      {
+        $include[] = explode('|', $category);
+      }
+    }
+
+    return array('include_category' => $include, 'exclude_category' => $exclude);
+  }
 }

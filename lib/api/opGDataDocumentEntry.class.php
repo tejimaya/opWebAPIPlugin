@@ -105,4 +105,21 @@ class opGDataDocumentEntry extends opGDataDocument
       $link->addAttribute('type', $type);
     }
   }
+
+  public function addCategory($term, $label = '', $scheme = '')
+  {
+    if (!$label)
+    {
+      $label = $term;
+    }
+
+    $category = $this->getElements()->addChild('category');
+    $category->addAttribute('term', $term);
+    $category->addAttribute('label', $label);
+
+    if ($scheme)
+    {
+      $category->addAttribute('scheme', $scheme);
+    }
+  }
 }
