@@ -17,6 +17,12 @@
  */
 class opAPICommunity extends opAPI implements opAPIInterface
 {
+  protected $orderByTable = array(
+      'published' => 'created_at',
+      'updated'   => 'updated_at',
+      'member'    => 'num_member',
+    );
+
   public function getSearchableFields()
   {
     return array('name');
@@ -28,8 +34,8 @@ class opAPICommunity extends opAPI implements opAPIInterface
       ->addConditionSearchQuery()
       ->addConditionPublished()
       ->addConditionUpdated()
-      ->setOrderBy()
-      ->setOffsetAndLimitation();
+      ->setOffsetAndLimitation()
+      ->setOrderBy();
 
     $communities = $this->getRouteObject()->execute();
     if (!$communities->count())
@@ -130,5 +136,14 @@ class opAPICommunity extends opAPI implements opAPIInterface
     $entry->setLink(app_url_for('mobile_frontend', 'community/home?id='.$community->getId(), true), 'alternate');
 
     return $entry;
+  }
+
+  public function setOrderBy()
+  {
+    $this->query
+      ->select('Community.*, COUNT(Community.CommunityMember.id) AS num_member')
+      ->groupBy('Community.CommunityMember.community_id');
+
+    return parent::setOrderBy();
   }
 }
