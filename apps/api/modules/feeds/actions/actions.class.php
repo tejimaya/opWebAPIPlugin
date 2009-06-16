@@ -32,6 +32,8 @@ class feedsActions extends sfActions
 
     $params = $request->getParameterHolder()->getAll();
     $this->api = new $className($params, $this->getRoute());
+
+    $this->dispatcher->notify(new sfEvent($this, 'feeds_action.pre_execute'));
   }
 
  /**
