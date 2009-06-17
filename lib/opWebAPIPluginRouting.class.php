@@ -30,10 +30,12 @@ class opWebAPIPluginRouting
       'communityEvent'        => new opWebAPIRouteCollection(array('model' => 'communityEvent', 'parent_model' => 'community')),
       'communityEventComment' => new opWebAPIRouteCollection(array('model' => 'communityEventComment', 'parent_model' => 'communityEvent')),
 
+/*
       'feeds_nodefaults' => new sfRoute(
         '/feeds/*',
         array('module' => 'default', 'action' => 'error', 'sf_format' => 'atom')
       ),
+*/
     );
 
     $routes = array_reverse($routes);
