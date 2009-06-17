@@ -303,4 +303,22 @@ abstract class opAPI
   {
     return $this->totalCount;
   }
+
+  public function getCategoryByRequestParameter()
+  {
+    if (!$this->hasParameter('category'))
+    {
+      return array();
+    }
+
+    $category = $this->getParameter('category');
+    $categories = explode(',', $category);
+
+    if ($categories)
+    {
+      return $categories;
+    }
+
+    return array();
+  }
 }
