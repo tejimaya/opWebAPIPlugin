@@ -42,9 +42,10 @@ class opGDataDocumentEntry extends opGDataDocument
     return $string;
   }
 
-  public function setTitle($title)
+  public function setTitle($title, $type = 'text')
   {
-    $this->getElements()->addChild('title', $title);
+    $element = $this->getElements()->addChild('title', $title);
+    $element->addAttribute('type', $type);
   }
 
   public function setId($id)
