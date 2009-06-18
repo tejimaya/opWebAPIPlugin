@@ -86,8 +86,16 @@ class opAPIMember extends opAPI implements opAPIInterface
     $profiles = $content->addChild('div');
     $profiles->addAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
 
+    $ids = array();
     foreach ($member->getProfiles() as $profile)
     {
+      if (in_array($profile->getName(), $ids))
+      {
+        continue;
+      }
+
+      $ids[] = $profile->getName();
+
       $child = $profiles->addChild('div', $profile);
       $child->addAttribute('id', $profile->getName());
     }
