@@ -17,9 +17,11 @@
  */
 class opGDataDocumentFeed extends opGDataDocument
 {
+  const OPEN_SEARCH_NAMESPACE = 'http://a9.com/-/spec/opensearchrss/1.0/';
+
   protected function getRootXMLString()
   {
-    $string = self::XML_DECLARATION.'<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/"></feed>';
+    $string = self::XML_DECLARATION.'<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="'.self::OPEN_SEARCH_NAMESPACE.'"></feed>';
     return $string;
   }
 
@@ -94,8 +96,8 @@ class opGDataDocumentFeed extends opGDataDocument
 
   public function setOpenSearch($totalResults, $startIndex, $itemsParPage)
   {
-    $this->getElements()->addChild('openSearch:totalResults', $totalResults);
-    $this->getElements()->addChild('openSearch:startIndex', $startIndex);
-    $this->getElements()->addChild('openSearch:itemsParPage', $itemsParPage);
+    $this->getElements()->addChild('totalResults', $totalResults, self::OPEN_SEARCH_NAMESPACE);
+    $this->getElements()->addChild('startIndex', $startIndex, self::OPEN_SEARCH_NAMESPACE);
+    $this->getElements()->addChild('itemsPerPage', $itemsParPage, self::OPEN_SEARCH_NAMESPACE);
   }
 }
