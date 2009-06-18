@@ -131,6 +131,8 @@ class opAPICommunity extends opAPI implements opAPIInterface
     $entry->setTitle($community->getName());
     $entry->setContent($community->getConfig('description'));
 
+    $entry->setAuthorByMember($community->getAdminMember());
+
     $entry->setLink(url_for('@feeds_community_retrieve_resource_normal?model=community&id='.$community->getId()), 'self', 'application/atom+xml');
     $entry->setLink(app_url_for('pc_frontend', 'community/home?id='.$community->getId(), true), 'alternate', 'text/html');
     $entry->setLink(app_url_for('mobile_frontend', 'community/home?id='.$community->getId(), true), 'alternate');
