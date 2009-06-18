@@ -81,6 +81,8 @@ class opAPIMember extends opAPI implements opAPIInterface
     sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url', 'opUtil', 'sfImage', 'Asset', 'Tag'));
     $entry->setTitle($member->getName());
 
+    $entry->setAuthor(null, null, $member->getEmailAddress());
+
     $content = $entry->getElements()->addChild('content');
     $content->addAttribute('type', 'xhtml');
     $profiles = $content->addChild('div');

@@ -53,17 +53,33 @@ class opGDataDocumentEntry extends opGDataDocument
     $this->getElements()->addChild('id', $id);
   }
 
-  public function setAuthor($name, $id)
+  public function setAuthor($name = null, $id = null, $email = null)
   {
-    $author = $this->getElements()->addChild('author');
-    $author->addChild('name', $name);
-    if (is_int($id))
+    if (!func_num_args())
     {
-      $author->addChild('id', $id);
+      return null;
     }
-    else
+
+    $author = $this->getElements()->addChild('author');
+
+    if ($name)
     {
-      $author->addChild('uri', $id);
+      $author->addChild('name', $name);
+    }
+    if ($id)
+    {
+      if (is_int($id))
+      {
+        $author->addChild('id', $id);
+      }
+      else
+      {
+        $author->addChild('uri', $id);
+      }
+    }
+    if ($email)
+    {
+      $author->addChild('email', $email);
     }
   }
 
