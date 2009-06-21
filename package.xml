@@ -13,18 +13,18 @@
   <email />
   <active>yes</active>
  </lead>
- <date>2009-06-17</date>
- <time>04:25:05</time>
+ <date>2009-06-19</date>
+ <time>10:53:50</time>
  <version>
-  <release>0.3.1</release>
-  <api>0.3.1</api>
+  <release>0.3.2</release>
+  <api>0.3.2</api>
  </version>
  <stability>
   <release>beta</release>
   <api>beta</api>
  </stability>
  <license>apache</license>
- <notes>added support for addtional GData futures</notes>
+ <notes>Fixed some issues that are not following AtomPub protocol or GData protocol</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="9c914a77c19b8f22b1bc331c86ef0e6a" name="apps/api/modules/feeds/actions/actions.class.php" role="data" />
@@ -37,7 +37,7 @@
    <file baseinstalldir="/" md5sum="cc7da2f61de3df41fa3499a49ca54518" name="lib/opWebAPIRoute.class.php" role="data" />
    <file baseinstalldir="/" md5sum="390985af5a11fbf5c9592994a73f9685" name="lib/opWebAPIRouteCollection.class.php" role="data" />
    <file baseinstalldir="/" md5sum="90a3311439d1b92315f4707bf9c564cc" name="lib/api/opAPI.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="96081adc12c322cc7777eec1ebad2663" name="lib/api/opAPICommunity.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="2c1b24d1549ca55a3b49056523a678fa" name="lib/api/opAPICommunity.class.php" role="data" />
    <file baseinstalldir="/" md5sum="6e0dd233d92b68e529f19a7b060e5a80" name="lib/api/opAPICommunityEvent.class.php" role="data" />
    <file baseinstalldir="/" md5sum="90965a4b0c35adbc8835fa3f91437087" name="lib/api/opAPICommunityEventComment.class.php" role="data" />
    <file baseinstalldir="/" md5sum="968188631c98e156d3b4ed4d348388ff" name="lib/api/opAPICommunityMember.class.php" role="data" />
@@ -45,15 +45,14 @@
    <file baseinstalldir="/" md5sum="ff979765df517a80f0ab4b9390b5045e" name="lib/api/opAPICommunityTopicComment.class.php" role="data" />
    <file baseinstalldir="/" md5sum="3bf48ced668305f13ce1d9c5109ac512" name="lib/api/opAPIDiary.class.php" role="data" />
    <file baseinstalldir="/" md5sum="a19cbef309a27f7b3094fdf0f7a9087d" name="lib/api/opAPIInterface.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="a10e009eb5a521b4d7122a0b2535c06b" name="lib/api/opAPIMember.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="6e94c1bf56e1523660a6e72c70baf0ca" name="lib/api/opAPIMember.class.php" role="data" />
    <file baseinstalldir="/" md5sum="f89be121c332ad337756f6f481c72a54" name="lib/api/opAtomPubDocument.class.php" role="data" />
    <file baseinstalldir="/" md5sum="b6683661f836e31adde3917b1d9eeece" name="lib/api/opAtomPubDocumentEntry.class.php" role="data" />
    <file baseinstalldir="/" md5sum="04957894bc45dd466de20e23807665cf" name="lib/api/opAtomPubDocumentFeed.class.php" role="data" />
    <file baseinstalldir="/" md5sum="ff7a25545a9b40232d7227f193979f3f" name="lib/api/opGDataDocument.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="50a825d002a7c4b3cad499cdcc680983" name="lib/api/opGDataDocumentEntry.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="3ce7f6917b5152987c2ff559d9d0a0af" name="lib/api/opGDataDocumentFeed.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="e656aba3968e11d74ef28713c1ec1236" name="lib/api/opGDataDocumentEntry.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="b18819ce72a1f49495e65fd329590f5c" name="lib/api/opGDataDocumentFeed.class.php" role="data" />
    <file baseinstalldir="/" md5sum="3b83ef96387f14655fc854ddc3c6bd57" name="LICENSE" role="data" />
-   <file baseinstalldir="/" md5sum="0ced4cee77f3db3a4caa191b6b0843c6" name="tags" role="data" />
   </dir>
  </contents>
  <dependencies>
@@ -98,6 +97,19 @@
    <date>2009-06-17</date>
    <license>apache</license>
    <notes>added support for addtional GData futures</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.3.2</release>
+    <api>0.3.2</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2009-06-19</date>
+   <license>apache</license>
+   <notes>Fixed some issues that are not following AtomPub protocol or GData protocol</notes>
   </release>
  </changelog>
 </package>
