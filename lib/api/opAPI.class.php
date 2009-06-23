@@ -289,9 +289,9 @@ abstract class opAPI
     $path = parse_url($url, PHP_URL_PATH);
     if ($path)
     {
-      $pieces = explode('/', $path);
-      if (isset($pieces[1]) && 'member' === $pieces[1])
+      if (false !== strpos($path, 'member'))
       {
+        $pieces = explode('/', $path);
         $result = (int)array_pop($pieces);
       }
     }
