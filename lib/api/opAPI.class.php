@@ -147,7 +147,7 @@ abstract class opAPI
   public function setOffsetAndLimitation()
   {
     $q = clone $this->getQuery();
-    $this->totalCount = $q->select('COUNT(id)')->execute(array(), Doctrine::HYDRATE_SINGLE_SCALAR);
+    $this->totalCount = $q->select('COUNT(DISTINCT id)')->execute(array(), Doctrine::HYDRATE_SINGLE_SCALAR);
     $this->getQuery()->setHydrationMode(Doctrine::HYDRATE_RECORD);
 
     $this->query->limit($this->getParameter('max-results', 25));
