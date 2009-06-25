@@ -13,18 +13,21 @@
   <email />
   <active>yes</active>
  </lead>
- <date>2009-06-19</date>
- <time>10:53:50</time>
+ <date>2009-06-24</date>
+ <time>09:32:57</time>
  <version>
-  <release>0.3.2</release>
-  <api>0.3.2</api>
+  <release>0.3.3</release>
+  <api>0.3.3</api>
  </version>
  <stability>
   <release>beta</release>
   <api>beta</api>
  </stability>
  <license>apache</license>
- <notes>Fixed some issues that are not following AtomPub protocol or GData protocol</notes>
+ <notes>
+   - changed the opAPI::getMemberIdByUrl() method for slipshod checking uri format
+   - fixed that opAPI::getTotalCount() doesn't return a valid count
+ </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="9c914a77c19b8f22b1bc331c86ef0e6a" name="apps/api/modules/feeds/actions/actions.class.php" role="data" />
@@ -36,7 +39,7 @@
    <file baseinstalldir="/" md5sum="39316703a32d7d35226fe8458c4222f1" name="lib/opWebAPIPluginRouting.class.php" role="data" />
    <file baseinstalldir="/" md5sum="cc7da2f61de3df41fa3499a49ca54518" name="lib/opWebAPIRoute.class.php" role="data" />
    <file baseinstalldir="/" md5sum="390985af5a11fbf5c9592994a73f9685" name="lib/opWebAPIRouteCollection.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="90a3311439d1b92315f4707bf9c564cc" name="lib/api/opAPI.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="c776923e1d52eff58d34a6fbde7674da" name="lib/api/opAPI.class.php" role="data" />
    <file baseinstalldir="/" md5sum="2c1b24d1549ca55a3b49056523a678fa" name="lib/api/opAPICommunity.class.php" role="data" />
    <file baseinstalldir="/" md5sum="6e0dd233d92b68e529f19a7b060e5a80" name="lib/api/opAPICommunityEvent.class.php" role="data" />
    <file baseinstalldir="/" md5sum="90965a4b0c35adbc8835fa3f91437087" name="lib/api/opAPICommunityEventComment.class.php" role="data" />
@@ -110,6 +113,22 @@
    <date>2009-06-19</date>
    <license>apache</license>
    <notes>Fixed some issues that are not following AtomPub protocol or GData protocol</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.3.3</release>
+    <api>0.3.3</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2009-06-24</date>
+   <license>apache</license>
+   <notes>
+     - changed the opAPI::getMemberIdByUrl() method for slipshod checking uri format
+     - fixed that opAPI::getTotalCount() doesn't return a valid count
+   </notes>
   </release>
  </changelog>
 </package>
