@@ -240,9 +240,13 @@ abstract class opAPI
 
     if ($this->hasParameter('q'))
     {
-      $list = opToolkit::extractEnclosedStrings($this->getParameter('q'));
+      $q = $this->getParameter('q');
+      if ('"' === $q[0] && '"' === $q[strlen($q)-1])
+      {
+        $q = substr($q, 1, strlen($q)-2);
+      }
 
-      $token = strtok($list['base'], ' ');
+      $token = strtok($q, ' ');
       while (false !== $token)
       {
         $isIgnore = false;
