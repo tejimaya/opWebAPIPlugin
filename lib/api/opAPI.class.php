@@ -28,7 +28,9 @@ abstract class opAPI
 
     $query = null,
     $object = null,
-    $parentObject = null;
+    $parentObject = null,
+
+    $emojiList = null;
 
   public function __construct($parameters = array(), $route)
   {
@@ -36,6 +38,8 @@ abstract class opAPI
 
     $this->query = $route->getObject();
     $this->parentObject = $route->getParentObject();
+
+    $this->emojiList = new OpenPNE_KtaiEmoji();
   }
 
   public function hasParameter($name)
@@ -324,5 +328,20 @@ abstract class opAPI
     }
 
     return array();
+  }
+
+  public function convertEmojiForAPI($str)
+  {
+    $pattern = '/\[([ies]:[0-9]{1,3})\]/';
+    return preg_replace_callback($pattern, array($this, 'convertEmojiForAPICallback'), $str);
+  }
+
+  public function convertEmojiForAPICallback($matches)
+  {
+    $o_code = $matches[1];
+    $o_carrier = $o_code[0];
+    $o_id = substr($o_code, 2);
+
+    return $this->emojiList->relation_list[$o_carrier]['i'][$o_id];
   }
 }

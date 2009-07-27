@@ -45,7 +45,7 @@ class feedsActions extends sfActions
   {
     $this->result = $this->api->feed();
     $this->forward404Unless($this->result);
-    return $this->renderText($this->result);
+    return $this->renderText($this->api->convertEmojiForAPI($this->result));
   }
 
  /**
@@ -58,7 +58,7 @@ class feedsActions extends sfActions
     $this->result = $this->api->entry();
     $this->forward404Unless($this->result);
     $entry = $this->api->createEntryByInstance($this->result);
-    return $this->renderText($entry->publish());
+    return $this->renderText($this->api->convertEmojiForAPI($entry->publish()));
   }
 
  /**
@@ -80,7 +80,7 @@ class feedsActions extends sfActions
     $this->getResponse()->setStatusCode(201);
     $this->getResponse()->setHttpHeader('Location', $url);
     $entry = $this->api->createEntryByInstance($this->result);
-    return $this->renderText($entry->publish());
+    return $this->renderText($this->api->convertEmojiForAPI($entry->publish()));
   }
 
  /**
@@ -93,7 +93,7 @@ class feedsActions extends sfActions
     $this->result = $this->api->update($this->api->getEntryXMLFromRequestBody());
     $this->forward404Unless($this->result);
     $entry = $this->api->createEntryByInstance($this->result);
-    return $this->renderText($entry->publish());
+    return $this->renderText($this->api->convertEmojiForAPI($entry->publish()));
   }
 
  /**
