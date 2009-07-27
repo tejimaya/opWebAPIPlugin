@@ -13,21 +13,21 @@
   <email />
   <active>yes</active>
  </lead>
- <date>2009-06-26</date>
- <time>11:36:18</time>
+ <date>2009-07-27</date>
+ <time>13:18:38</time>
  <version>
-  <release>0.3.4</release>
-  <api>0.3.4</api>
+  <release>0.3.6</release>
+  <api>0.3.6</api>
  </version>
  <stability>
   <release>beta</release>
   <api>beta</api>
  </stability>
  <license>apache</license>
- <notes>fixed that the search request parameter doesn&apos;t handle double-quotation</notes>
+ <notes>added support for coverting emojifor DoComO format</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="9c914a77c19b8f22b1bc331c86ef0e6a" name="apps/api/modules/feeds/actions/actions.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="f4a22b6c261450021d041e3c8cd8edbc" name="apps/api/modules/feeds/actions/actions.class.php" role="data" />
    <file baseinstalldir="/" md5sum="d41d8cd98f00b204e9800998ecf8427e" name="apps/api/modules/feeds/templates/indexSuccess.php" role="data" />
    <file baseinstalldir="/" md5sum="c6fe16813b8d96dd19dd093aaeb2dbed" name="apps/pc_backend/modules/opWebAPIPlugin/actions/actions.class.php" role="data" />
    <file baseinstalldir="/" md5sum="37e4eb30544da940467ae7e4f06f1dae" name="apps/pc_backend/modules/opWebAPIPlugin/lib/APIAllowIPConfigForm.class.php" role="data" />
@@ -36,7 +36,7 @@
    <file baseinstalldir="/" md5sum="39316703a32d7d35226fe8458c4222f1" name="lib/opWebAPIPluginRouting.class.php" role="data" />
    <file baseinstalldir="/" md5sum="cc7da2f61de3df41fa3499a49ca54518" name="lib/opWebAPIRoute.class.php" role="data" />
    <file baseinstalldir="/" md5sum="390985af5a11fbf5c9592994a73f9685" name="lib/opWebAPIRouteCollection.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="6ae04e9d1aa6ef15b53a1725850abd7b" name="lib/api/opAPI.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="8d03283f1170bddb481dfc12c290da33" name="lib/api/opAPI.class.php" role="data" />
    <file baseinstalldir="/" md5sum="2c1b24d1549ca55a3b49056523a678fa" name="lib/api/opAPICommunity.class.php" role="data" />
    <file baseinstalldir="/" md5sum="6e0dd233d92b68e529f19a7b060e5a80" name="lib/api/opAPICommunityEvent.class.php" role="data" />
    <file baseinstalldir="/" md5sum="90965a4b0c35adbc8835fa3f91437087" name="lib/api/opAPICommunityEventComment.class.php" role="data" />
@@ -137,6 +137,19 @@
    <date>2009-06-26</date>
    <license>apache</license>
    <notes>fixed that the search request parameter doesn&apos;t handle double-quotation</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.3.6</release>
+    <api>0.3.6</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2009-07-27</date>
+   <license>apache</license>
+   <notes>added support for coverting emojifor DoComO format</notes>
   </release>
  </changelog>
 </package>
