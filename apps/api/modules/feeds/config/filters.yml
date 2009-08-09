@@ -1,0 +1,10 @@
+rendering: ~
+
+check_oauth:
+  class: opCheckOAuthAccessTokenFilter
+
+security: ~
+
+cache:     ~
+common:    ~
+execution: ~
