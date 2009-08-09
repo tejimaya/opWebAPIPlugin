@@ -14,13 +14,23 @@
  * @package    opWebAPIPlugin
  * @author     Kousuke Ebihara <ebihara@tejimaya.com>
  */
-class opWebAPIRoute extends sfObjectRoute
+class opWebAPIRoute extends sfObjectRoute implements opAPIRouteInterface
 {
   const
     URI_TYPE_COLLECTION = 'collection',
     URI_TYPE_MEMBER = 'member';
 
   protected $parentObject = false;
+
+  public function getAPIName()
+  {
+    return $this->options['api_name'];
+  }
+
+  public function getAPICaption()
+  {
+    return $this->options['api_caption'];
+  }
 
   protected function getObjectForParameters($parameters)
   {

@@ -74,21 +74,44 @@ class opWebAPIRouteCollection extends sfRouteCollection
   {
     $options = $this->getOptions();
 
+    $apis = array('retrieve_feed', 'retrieve_resource', 'insert_resource', 'update_resource', 'delete_resource');
+    if (!empty($options['apis']))
+    {
+      $apis = (array)$options['apis'];
+    }
+
     $model = $options['model'];
+    if (!class_exists(ucfirst($model)))
+    {
+      return false;
+    }
+
     $parentModel = '';
     $prefix = 'feeds_'.sfInflector::underscore($model).'_';
 
     if (!empty($options['parent_model']))
     {
       $parentModel = $options['parent_model'];
+      if (!class_exists(ucfirst($parentModel)))
+      {
+        return false;
+      }
     }
 
     foreach ($this->templates as $name => $template)
     {
+      if (!in_array($name, $apis))
+      {
+        continue;
+      }
+
       $uris = array();
       $action = array('module' => 'feeds', 'action' => $template['action']);
       $requirements = array('model' => $model, 'sf_method' => $template['method']);
       $routeOption = array('model' => ucfirst($model), 'type' => 'object', 'uriType' => $template['uriType']);
+
+      $routeOption['api_name'] = 'webapi_'.sfInflector::underscore($model).'_'.$template['method'];
+      $routeOption['api_caption'] = ucfirst($template['method']).' '.sfInflector::humanize($model).' item(s)';
 
       if ($template['uriType'] === opWebAPIRoute::URI_TYPE_COLLECTION)
       {

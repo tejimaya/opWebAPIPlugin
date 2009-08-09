@@ -1,0 +1,38 @@
+member:
+  class: opWebAPIRouteCollection
+  options: { model: 'member', apis: [retrieve_feed, retrieve_resource] }
+
+diary:
+  class: opWebAPIRouteCollection
+  options: { model: 'diary' }
+
+community:
+  class: opWebAPIRouteCollection
+  options: { model: 'community' }
+
+communityMember:
+  class: opWebAPIRouteCollection
+  options: { model: 'communityMember', parent_model: 'community', apis: [retrieve_feed, retrieve_resource] }
+
+communityTopic:
+  class: opWebAPIRouteCollection
+  options: { model: 'communityTopic', parent_model: 'community' }
+
+communityTopicComment:
+  class: opWebAPIRouteCollection
+  options: { model: 'communityTopicComment', parent_model: 'communityTopic', apis: [retrieve_feed, retrieve_resource, insert_resource, delete_resource] }
+
+communityEvent:
+  class: opWebAPIRouteCollection
+  options: { model: 'communityEvent', parent_model: 'community' }
+
+communityEventComment:
+  class: opWebAPIRouteCollection
+  options: { model: 'communityEventComment', parent_model: 'communityEvent', apis: [retrieve_feed, retrieve_resource, insert_resource, delete_resource] }
+
+#$apis = array('retrieve_feed', 'retrieve_resource', 'insert_resource', 'update_resource', 'delete_resource');
+#feeds_nodefaults:
+#  url: /feeds/*
+#  class: sfRoute
+#  param: { module: 'default', action: 'error', sf_format: 'atom' }
+
