@@ -18,6 +18,8 @@
 abstract class opAPI
 {
   protected
+    $member = null,
+
     $parameters = array(),
     $totalCount = 0,
 
@@ -343,5 +345,10 @@ abstract class opAPI
     $o_id = substr($o_code, 2);
 
     return $this->emojiList->relation_list[$o_carrier]['i'][$o_id];
+  }
+
+  public function setMemberId($id)
+  {
+    $this->member = Doctrine::getTable('Member')->find($id);
   }
 }

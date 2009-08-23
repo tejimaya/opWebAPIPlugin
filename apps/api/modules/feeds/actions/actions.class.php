@@ -30,6 +30,11 @@ class feedsActions extends sfActions
     $params = $request->getParameterHolder()->getAll();
     $this->api = new $className($params, $this->getRoute());
 
+    if ($this->getUser()->hasAttribute('member_id'))
+    {
+      $this->api->setMemberId($this->getUser()->getAttribute('member_id'));
+    }
+
     $this->dispatcher->notify(new sfEvent($this, 'feeds_action.pre_execute'));
   }
 
