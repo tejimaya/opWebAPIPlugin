@@ -1,0 +1,123 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+  <file orginal="global" source-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="">
+        <source>Name</source>
+        <target>名前</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Description</source>
+        <target>説明文</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Using apis</source>
+        <target>使用する API</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Image</source>
+        <target>画像</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Select apis that your application needs.</source>
+        <target>アプリケーションが使用したい API を選択してください。</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Get Member item(s)</source>
+        <target>メンバー情報の取得</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Get Diary item(s)</source>
+        <target>日記の取得</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Post Diary item(s)</source>
+        <target>日記の投稿</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Put Diary item(s)</source>
+        <target>日記の更新</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Delete Diary item(s)</source>
+        <target>日記の削除</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Get Community item(s)</source>
+        <target>コミュニティの取得</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Post Community item(s)</source>
+        <target>コミュニティの追加</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Put Community item(s)</source>
+        <target>コミュニティの更新</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Delete Community item(s)</source>
+        <target>コミュニティの削除</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Get CommunityMember item(s)</source>
+        <target>コミュニティメンバー情報の取得</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Get CommunityTopic item(s)</source>
+        <target>コミュニティトピックの取得</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Post CommunityTopic item(s)</source>
+        <target>コミュニティトピックの投稿</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Put CommunityTopic item(s)</source>
+        <target>コミュニティトピックの更新</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Delete CommunityTopic item(s)</source>
+        <target>コミュニティトピックの削除</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Get CommunityTopicComment item(s)</source>
+        <target>コミュニティトピックコメントの取得</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Post CommunityTopicComment item(s)</source>
+        <target>コミュニティトピックコメントの投稿</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Delete CommunityTopicComment item(s)</source>
+        <target>コミュニティトピックコメントの削除</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Get CommunityEvent item(s)</source>
+        <target>コミュニティトピックイベントの取得</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Post CommunityEvent item(s)</source>
+        <target>コミュニティトピックイベントの投稿</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Put CommunityEvent item(s)</source>
+        <target>コミュニティトピックイベントの更新</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Delete CommunityEvent item(s)</source>
+        <target>コミュニティトピックイベントの削除</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Get CommunityEventComment item(s)</source>
+        <target>コミュニティトピックイベントの取得</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Post CommunityEventComment item(s)</source>
+        <target>コミュニティトピックイベントの追加</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Delete CommunityEventComment item(s)</source>
+        <target>コミュニティトピックイベントの削除</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
