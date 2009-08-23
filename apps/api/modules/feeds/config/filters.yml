@@ -1,7 +1,7 @@
 rendering: ~
 
 check_oauth:
-  class: opCheckOAuthAccessTokenFilter
+  class: opCheckAllowedAccessWebAPI
 
 security: ~
 
