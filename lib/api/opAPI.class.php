@@ -351,4 +351,16 @@ abstract class opAPI
   {
     $this->member = Doctrine::getTable('Member')->find($id);
   }
+
+  public function getAcl($model)
+  {
+    if (!$this->member)
+    {
+      return null;
+    }
+
+    $builderName = 'op'.get_class($model).'AclBuilder';
+
+    return call_user_func($builderName.'::buildResource', $model, array($this->member));
+  }
 }

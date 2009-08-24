@@ -50,7 +50,15 @@ class opAPIMember extends opAPI implements opAPIInterface
 
   public function entry()
   {
-    return $this->getRouteObject()->fetchOne();
+    $entry = $this->getRouteObject()->fetchOne();
+
+    $acl = $this->getAcl($entry);
+    if ($acl && !$acl->isAllowed($this->member->id, null, 'view'))
+    {
+      return false;
+    }
+
+    return $entry;
   }
 
   public function insert(SimpleXMLElement $xml)
