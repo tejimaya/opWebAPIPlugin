@@ -296,6 +296,11 @@ abstract class opAPI
   {
     $result = '';
 
+    if ($this->member)
+    {
+      return $this->member->id;
+    }
+
     $path = parse_url($url, PHP_URL_PATH);
     if ($path)
     {

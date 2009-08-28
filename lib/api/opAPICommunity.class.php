@@ -94,6 +94,11 @@ class opAPICommunity extends opAPI implements opAPIInterface
       return false;
     }
 
+    if ($this->member && !$community->isAllowed($this->member, 'edit'))
+    {
+      return false;
+    }
+
     $community->setName((string)$xml->title);
     $community->save();
 
@@ -108,6 +113,11 @@ class opAPICommunity extends opAPI implements opAPIInterface
   {
     $community = $this->getRouteObject()->fetchOne();
     if (!$community)
+    {
+      return false;
+    }
+
+    if ($this->member && !$community->isAllowed($this->member, 'edit'))
     {
       return false;
     }
