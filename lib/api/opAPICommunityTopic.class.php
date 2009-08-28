@@ -37,6 +37,15 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
       return false;
     }
 
+    if ($this->member)
+    {
+      $acl = $this->getCollectionAcl($this->getParentObject(), $this->member);
+      if (!$acl || !$acl->isAllowed($this->member->id, null, 'view'))
+      {
+        return false;
+      }
+    }
+
     $feed = $this->getGeneralFeed($this->getParentObject()->getName(), $this->getTotalCount());
     foreach ($communityTopicList as $key => $topic)
     {
@@ -50,7 +59,18 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
 
   public function entry()
   {
-    return $this->getRouteObject()->fetchOne();
+    $topic = $this->getRouteObject()->fetchOne();
+
+    if ($this->member && $topic)
+    {
+      $acl = $this->getResourceAcl($topic, $this->member);
+      if (!$acl || !$acl->isAllowed($this->member->id, null, 'view'))
+      {
+        return false;
+      }
+    }
+
+    return $topic;
   }
 
   public function insert(SimpleXMLElement $xml)
@@ -59,6 +79,15 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
     if (!$member)
     {
       return false;
+    }
+
+    if ($this->member)
+    {
+      $acl = $this->getCollectionAcl($this->getParentObject(), $this->member);
+      if (!$acl || !$acl->isAllowed($this->member->id, null, 'add'))
+      {
+        return false;
+      }
     }
 
     $topic = new CommunityTopic();
@@ -79,6 +108,15 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
       return false;
     }
 
+    if ($this->member && $topic)
+    {
+      $acl = $this->getResourceAcl($topic, $this->member);
+      if (!$acl || !$acl->isAllowed($this->member->id, null, 'edit'))
+      {
+        return false;
+      }
+    }
+
     $topic->setName($xml->title);
     $topic->setName((string)$xml->title);
     $topic->setBody((string)$xml->content);
@@ -93,6 +131,15 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
     if (!$topic)
     {
       return false;
+    }
+
+    if ($this->member && $topic)
+    {
+      $acl = $this->getResourceAcl($topic, $this->member);
+      if (!$acl || !$acl->isAllowed($this->member->id, null, 'edit'))
+      {
+        return false;
+      }
     }
 
     $topic->delete();
@@ -120,5 +167,15 @@ class opAPICommunityTopic extends opAPI implements opAPIInterface
     $entry->setLink(app_url_for('mobile_frontend', 'communityTopic/detail?id='.$topic->getId(), true), 'alternate');
 
     return $entry;
+  }
+
+  protected function getCollectionAcl($community, $member)
+  {
+    return opCommunityTopicAclBuilder::buildCollection($community, array($member));
+  }
+
+  protected function getResourceAcl($communityTopic, $member)
+  {
+    return opCommunityTopicAclBuilder::buildResource($communityTopic, array($member));
   }
 }

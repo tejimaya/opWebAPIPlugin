@@ -25,6 +25,15 @@ class opAPICommunityEvent extends opAPICommunityTopic
       return false;
     }
 
+    if ($this->member)
+    {
+      $acl = $this->getCollectionAcl($this->getParentObject(), $this->member);
+      if (!$acl || !$acl->isAllowed($this->member->id, null, 'add'))
+      {
+        return false;
+      }
+    }
+
     $gd = $xml->children(opGDataDocument::NAMESPACE);
     if (!$gd)
     {
