@@ -17,21 +17,37 @@
  */
 class APIAllowIPConfig extends sfForm
 {
-  protected $configName = 'op_web_api_plugin_ip_list';
+  protected $configs = array(
+    'auth_type'   => 'op_web_api_plugin_auth_type',
+    'ip_list'     => 'op_web_api_plugin_ip_list',
+    'using_cdata' => 'op_web_api_plugin_using_cdata',
+  );
 
   public function configure()
   {
+    $authTypeChoices = array('IP Address', 'OAuth');
+    $usingCDataChoices = array('使用しない', '使用する');
+
     $this->setWidgets(array(
+      'auth_type' => new sfWidgetFormSelect(array('choices' => $authTypeChoices)),
       'ip_list' => new sfWidgetFormTextarea(),
+      'using_cdata' => new sfWidgetFormSelect(array('choices' => $usingCDataChoices)),
     ));
     $this->setValidators(array(
+      'auth_type' => new sfValidatorChoice(array('choices' => array_keys($authTypeChoices))),
       'ip_list' => new sfValidatorCallback(array('callback' => array($this, 'validate'))),
+      'using_cdata' => new sfValidatorChoice(array('choices' => array_keys($usingCDataChoices))),
     ));
 
-    $config = Doctrine::getTable('SnsConfig')->retrieveByName($this->configName);
-    if ($config)
+    $this->widgetSchema->setHelp('ip_list', 'API へのアクセスを許可する IP アドレスを入力してください。<br />※改行区切りで複数の IP アドレスを入力することができます。');
+
+    foreach ($this->configs as $k => $v)
     {
-      $this->getWidgetSchema()->setDefault('ip_list', $config->getValue());
+      $config = Doctrine::getTable('SnsConfig')->retrieveByName($v);
+      if ($config)
+      {
+        $this->getWidgetSchema()->setDefault($k, $config->getValue());
+      }
     }
 
     $this->getWidgetSchema()->setNameFormat('api_config[%s]');
@@ -39,14 +55,22 @@ class APIAllowIPConfig extends sfForm
 
   public function save()
   {
-    $config = Doctrine::getTable('SnsConfig')->retrieveByName($this->configName);
-    if (!$config)
+    foreach ($this->getValues() as $k => $v)
     {
-      $config = new SnsConfig();
-      $config->setName($this->configName);
+      if (!isset($this->configs[$k]))
+      {
+        continue;
+      }
+
+      $config = Doctrine::getTable('SnsConfig')->retrieveByName($this->configs[$k]);
+      if (!$config)
+      {
+        $config = new SnsConfig();
+        $config->setName($this->configs[$k]);
+      }
+      $config->setValue($v);
+      $config->save();
     }
-    $config->setValue($this->getValue('ip_list'));
-    $config->save();
   }
 
   public function validate($validator, $value, $arguments = array())

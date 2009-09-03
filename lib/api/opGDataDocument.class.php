@@ -44,7 +44,7 @@ abstract class opGDataDocument
     $elements = $this->getElements();
     $result = $elements->asXML();
 
-    if (Doctrine::getTable('SnsConfig')->get('op_web_api_plugin_using_cdata', true))
+    if (Doctrine::getTable('SnsConfig')->get('op_web_api_plugin_using_cdata', false))
     {
       $result = preg_replace('/<content type="(.+?)">(.+?)<\/content>/ims', '<content type="$1"><![CDATA[$2]]></content>', $result, -1, $count);
       $result = preg_replace('/<title type="(.+?)">(.+?)<\/title>/ims', '<title type="$1"><![CDATA[$2]]></title>', $result, -1, $count);

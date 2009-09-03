@@ -52,7 +52,7 @@ class opAPIMember extends opAPI implements opAPIInterface
   {
     $entry = $this->getRouteObject()->fetchOne();
 
-    if (!$this->member || !$entry->isAllowed($this->member, 'view'))
+    if ($this->member && !$entry->isAllowed($this->member, 'view'))
     {
       return false;
     }
