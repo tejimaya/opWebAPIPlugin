@@ -14,17 +14,17 @@
   <active>yes</active>
  </lead>
  <date>2009-09-03</date>
- <time>12:40:22</time>
+ <time>13:01:37</time>
  <version>
-  <release>0.3.7</release>
-  <api>0.3.7</api>
+  <release>0.3.8</release>
+  <api>0.3.8</api>
  </version>
  <stability>
   <release>beta</release>
   <api>beta</api>
  </stability>
  <license>apache</license>
- <notes>Added ability to authorize by OAuth</notes>
+ <notes>Packaged some missing files</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="7142864d664dd1080467a65f1b6feedc" name="apps/api/modules/feeds/actions/actions.class.php" role="data" />
@@ -167,6 +167,19 @@
    <date>2009-09-03</date>
    <license>apache</license>
    <notes>Added ability to authorize by OAuth</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.3.8</release>
+    <api>0.3.8</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2009-09-03</date>
+   <license>apache</license>
+   <notes>Packaged some missing files</notes>
   </release>
  </changelog>
 </package>
