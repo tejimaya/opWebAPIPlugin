@@ -1,0 +1,7 @@
+SnsConfig:
+  api_auth_type:
+    name: op_web_api_plugin_auth_type
+    value: 1
+  api_using_cdata:
+    name: op_web_api_plugin_using_cdata
+    value: 1
