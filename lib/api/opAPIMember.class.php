@@ -113,7 +113,15 @@ class opAPIMember extends opAPI implements opAPIInterface
 
       $ids[] = $profile->getName();
 
-      $child = $profiles->addChild('div', $profile);
+      if ($profile->getProfile()->isPreset())
+      {
+        $i18n = sfContext::getInstance()->getI18N();
+        $child = $profiles->addChild('div', $i18n->__((string)$profile));
+      }
+      else
+      {
+        $child = $profiles->addChild('div', $profile);
+      }
       $child->addAttribute('id', $profile->getName());
     }
 
