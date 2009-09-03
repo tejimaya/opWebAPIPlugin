@@ -13,43 +13,47 @@
   <email />
   <active>yes</active>
  </lead>
- <date>2009-07-27</date>
- <time>13:18:38</time>
+ <date>2009-09-03</date>
+ <time>12:40:22</time>
  <version>
-  <release>0.3.6</release>
-  <api>0.3.6</api>
+  <release>0.3.7</release>
+  <api>0.3.7</api>
  </version>
  <stability>
   <release>beta</release>
   <api>beta</api>
  </stability>
  <license>apache</license>
- <notes>added support for coverting emojifor DoComO format</notes>
+ <notes>Added ability to authorize by OAuth</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="f4a22b6c261450021d041e3c8cd8edbc" name="apps/api/modules/feeds/actions/actions.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="7142864d664dd1080467a65f1b6feedc" name="apps/api/modules/feeds/actions/actions.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="5662d54f575bfe6027c9323dc5fba48d" name="apps/api/modules/feeds/config/filters.yml" role="data" />
+   <file baseinstalldir="/" md5sum="9825fc4647c91fc079ced0f3c17aca05" name="apps/api/modules/feeds/config/security.yml" role="data" />
    <file baseinstalldir="/" md5sum="d41d8cd98f00b204e9800998ecf8427e" name="apps/api/modules/feeds/templates/indexSuccess.php" role="data" />
    <file baseinstalldir="/" md5sum="c6fe16813b8d96dd19dd093aaeb2dbed" name="apps/pc_backend/modules/opWebAPIPlugin/actions/actions.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="37e4eb30544da940467ae7e4f06f1dae" name="apps/pc_backend/modules/opWebAPIPlugin/lib/APIAllowIPConfigForm.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="b790f7f59bb51dbaee22b323959b4d52" name="apps/pc_backend/modules/opWebAPIPlugin/templates/indexSuccess.php" role="data" />
-   <file baseinstalldir="/" md5sum="a2a1427eb5f7fc7e7b0b14c46e8f03c3" name="config/config.php" role="data" />
-   <file baseinstalldir="/" md5sum="39316703a32d7d35226fe8458c4222f1" name="lib/opWebAPIPluginRouting.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="cc7da2f61de3df41fa3499a49ca54518" name="lib/opWebAPIRoute.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="390985af5a11fbf5c9592994a73f9685" name="lib/opWebAPIRouteCollection.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="8d03283f1170bddb481dfc12c290da33" name="lib/api/opAPI.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="2c1b24d1549ca55a3b49056523a678fa" name="lib/api/opAPICommunity.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="6e0dd233d92b68e529f19a7b060e5a80" name="lib/api/opAPICommunityEvent.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="b73093099e684522b84eb88993daec8d" name="apps/pc_backend/modules/opWebAPIPlugin/lib/APIAllowIPConfigForm.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="d80cb5f36c730484a87ebffe25815c14" name="apps/pc_backend/modules/opWebAPIPlugin/templates/indexSuccess.php" role="data" />
+   <file baseinstalldir="/" md5sum="eecb620c933dac7c9b4ab114bf0c5a63" name="config/routing.yml" role="data" />
+   <file baseinstalldir="/" md5sum="271b6871602b022a48278bd5ae94114c" name="data/fixtures/010_default_api_configuration.yml" role="data" />
+   <file baseinstalldir="/" md5sum="0784018e5c535778e61ef1462866dc2d" name="i18n/api.ja.xml" role="data" />
+   <file baseinstalldir="/" md5sum="97affd128c5aa37edc37b8f1bf1052dd" name="lib/opCheckAllowedAccessWebAPI.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="7436260e21fcdcf61960f2386c1637c9" name="lib/opWebAPIRoute.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="bc219e649eb1c169bb29a2eb150d66c2" name="lib/opWebAPIRouteCollection.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="961149c42578c8fb5b9c641a1408d14f" name="lib/api/opAPI.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="61ee834cbf8ad2a8a0dfa7996af091e0" name="lib/api/opAPICommunity.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="fade8cef35eb9f380bf0c732abf552c3" name="lib/api/opAPICommunityEvent.class.php" role="data" />
    <file baseinstalldir="/" md5sum="90965a4b0c35adbc8835fa3f91437087" name="lib/api/opAPICommunityEventComment.class.php" role="data" />
    <file baseinstalldir="/" md5sum="968188631c98e156d3b4ed4d348388ff" name="lib/api/opAPICommunityMember.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="cf06deeae3960639d1ff64de58c45665" name="lib/api/opAPICommunityTopic.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="4380908364032e91c576df935a7f0d9a" name="lib/api/opAPICommunityTopic.class.php" role="data" />
    <file baseinstalldir="/" md5sum="ff979765df517a80f0ab4b9390b5045e" name="lib/api/opAPICommunityTopicComment.class.php" role="data" />
    <file baseinstalldir="/" md5sum="3bf48ced668305f13ce1d9c5109ac512" name="lib/api/opAPIDiary.class.php" role="data" />
    <file baseinstalldir="/" md5sum="a19cbef309a27f7b3094fdf0f7a9087d" name="lib/api/opAPIInterface.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="6e94c1bf56e1523660a6e72c70baf0ca" name="lib/api/opAPIMember.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="ef8aecfb2984a93f027ff739d0a47f86" name="lib/api/opAPIMember.class.php" role="data" />
    <file baseinstalldir="/" md5sum="f89be121c332ad337756f6f481c72a54" name="lib/api/opAtomPubDocument.class.php" role="data" />
    <file baseinstalldir="/" md5sum="b6683661f836e31adde3917b1d9eeece" name="lib/api/opAtomPubDocumentEntry.class.php" role="data" />
    <file baseinstalldir="/" md5sum="04957894bc45dd466de20e23807665cf" name="lib/api/opAtomPubDocumentFeed.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="ff7a25545a9b40232d7227f193979f3f" name="lib/api/opGDataDocument.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="b69d7bb02d236705b18476b025e7064b" name="lib/api/opGDataDocument.class.php" role="data" />
    <file baseinstalldir="/" md5sum="e656aba3968e11d74ef28713c1ec1236" name="lib/api/opGDataDocumentEntry.class.php" role="data" />
    <file baseinstalldir="/" md5sum="b18819ce72a1f49495e65fd329590f5c" name="lib/api/opGDataDocumentFeed.class.php" role="data" />
    <file baseinstalldir="/" md5sum="3b83ef96387f14655fc854ddc3c6bd57" name="LICENSE" role="data" />
@@ -150,6 +154,19 @@
    <date>2009-07-27</date>
    <license>apache</license>
    <notes>added support for coverting emojifor DoComO format</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.3.7</release>
+    <api>0.3.7</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2009-09-03</date>
+   <license>apache</license>
+   <notes>Added ability to authorize by OAuth</notes>
   </release>
  </changelog>
 </package>
