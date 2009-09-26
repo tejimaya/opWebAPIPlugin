@@ -44,7 +44,10 @@ class opGDataDocumentEntry extends opGDataDocument
 
   public function setTitle($title, $type = 'text')
   {
-    $element = $this->getElements()->addChild('title', $title);
+    $element = $this->getElements()->addChild('title');
+
+    $this->addValidStringToNode($element, $title);
+
     $element->addAttribute('type', $type);
   }
 
@@ -105,7 +108,10 @@ class opGDataDocumentEntry extends opGDataDocument
 
   public function setContent($content, $type = 'text')
   {
-    $element = $this->getElements()->addChild('content', $content);
+    $element = $this->getElements()->addChild('content');
+
+    $this->addValidStringToNode($element, $content);
+
     $element->addAttribute('type', $type);
   }
 
