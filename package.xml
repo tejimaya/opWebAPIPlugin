@@ -13,18 +13,18 @@
   <email />
   <active>yes</active>
  </lead>
- <date>2009-09-26</date>
- <time>18:16:25</time>
+ <date>2009-09-03</date>
+ <time>12:40:22</time>
  <version>
-  <release>0.3.8</release>
-  <api>0.3.8</api>
+  <release>0.3.7</release>
+  <api>0.3.7</api>
  </version>
  <stability>
   <release>beta</release>
   <api>beta</api>
  </stability>
  <license>apache</license>
- <notes>This plugin is now handling string type node correctly.</notes>
+ <notes>Added ability to authorize by OAuth</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="7142864d664dd1080467a65f1b6feedc" name="apps/api/modules/feeds/actions/actions.class.php" role="data" />
@@ -49,12 +49,12 @@
    <file baseinstalldir="/" md5sum="ff979765df517a80f0ab4b9390b5045e" name="lib/api/opAPICommunityTopicComment.class.php" role="data" />
    <file baseinstalldir="/" md5sum="3bf48ced668305f13ce1d9c5109ac512" name="lib/api/opAPIDiary.class.php" role="data" />
    <file baseinstalldir="/" md5sum="a19cbef309a27f7b3094fdf0f7a9087d" name="lib/api/opAPIInterface.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="26514798ea7b1dadddb6fcd4466f5b6d" name="lib/api/opAPIMember.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="ef8aecfb2984a93f027ff739d0a47f86" name="lib/api/opAPIMember.class.php" role="data" />
    <file baseinstalldir="/" md5sum="f89be121c332ad337756f6f481c72a54" name="lib/api/opAtomPubDocument.class.php" role="data" />
    <file baseinstalldir="/" md5sum="b6683661f836e31adde3917b1d9eeece" name="lib/api/opAtomPubDocumentEntry.class.php" role="data" />
    <file baseinstalldir="/" md5sum="04957894bc45dd466de20e23807665cf" name="lib/api/opAtomPubDocumentFeed.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="dda0a9d31371cc4b7ba24772b3606a37" name="lib/api/opGDataDocument.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="8696aa9452b4b5b1e03114a0f9d11dbb" name="lib/api/opGDataDocumentEntry.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="b69d7bb02d236705b18476b025e7064b" name="lib/api/opGDataDocument.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="e656aba3968e11d74ef28713c1ec1236" name="lib/api/opGDataDocumentEntry.class.php" role="data" />
    <file baseinstalldir="/" md5sum="b18819ce72a1f49495e65fd329590f5c" name="lib/api/opGDataDocumentFeed.class.php" role="data" />
    <file baseinstalldir="/" md5sum="3b83ef96387f14655fc854ddc3c6bd57" name="LICENSE" role="data" />
   </dir>
@@ -167,19 +167,6 @@
    <date>2009-09-03</date>
    <license>apache</license>
    <notes>Added ability to authorize by OAuth</notes>
-  </release>
-  <release>
-   <version>
-    <release>0.3.8</release>
-    <api>0.3.8</api>
-   </version>
-   <stability>
-    <release>beta</release>
-    <api>beta</api>
-   </stability>
-   <date>2009-09-26</date>
-   <license>apache</license>
-   <notes>This plugin is now handling string type node correctly.</notes>
   </release>
  </changelog>
 </package>
