@@ -84,7 +84,7 @@ class opAPICommunityMember extends opAPI implements opAPIInterface
 
     foreach ($member->getProfiles() as $profile)
     {
-      $child = $profiles->addChild('div', $profile);
+      $child = $profiles->addChild('div', (string)$profile);
       $child->addAttribute('id', $profile->getName());
     }
 
