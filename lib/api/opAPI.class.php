@@ -349,6 +349,11 @@ abstract class opAPI
     $o_carrier = $o_code[0];
     $o_id = substr($o_code, 2);
 
+    if ('i' === $o_carrier)
+    {
+      return $matches[0];
+    }
+
     return $this->emojiList->relation_list[$o_carrier]['i'][$o_id];
   }
 
