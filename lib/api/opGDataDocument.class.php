@@ -61,11 +61,11 @@ abstract class opGDataDocument
 
     if (Doctrine::getTable('SnsConfig')->get('op_web_api_plugin_using_cdata', false))
     {
-      $child = $doc->createCDataSection((string)$string);
+      $child = $doc->createCDataSection($string);
     }
     else
     {
-      $child = $doc->createTextNode((string)$string);
+      $child = $doc->createTextNode($string);
     }
 
     $domNode->appendChild($child);

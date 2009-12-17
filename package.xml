@@ -13,18 +13,18 @@
   <email />
   <active>yes</active>
  </lead>
- <date>2009-09-26</date>
- <time>18:28:52</time>
+ <date>2009-12-12</date>
+ <time>22:09:35</time>
  <version>
-  <release>0.3.8</release>
-  <api>0.3.8</api>
+  <release>0.3.9</release>
+  <api>0.3.9</api>
  </version>
  <stability>
   <release>beta</release>
   <api>beta</api>
  </stability>
  <license>apache</license>
- <notes>This plugin is now handling string type node correctly.</notes>
+ <notes>fixed segfault and converting Emoji</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="7142864d664dd1080467a65f1b6feedc" name="apps/api/modules/feeds/actions/actions.class.php" role="data" />
@@ -40,11 +40,11 @@
    <file baseinstalldir="/" md5sum="97affd128c5aa37edc37b8f1bf1052dd" name="lib/opCheckAllowedAccessWebAPI.class.php" role="data" />
    <file baseinstalldir="/" md5sum="7436260e21fcdcf61960f2386c1637c9" name="lib/opWebAPIRoute.class.php" role="data" />
    <file baseinstalldir="/" md5sum="bc219e649eb1c169bb29a2eb150d66c2" name="lib/opWebAPIRouteCollection.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="961149c42578c8fb5b9c641a1408d14f" name="lib/api/opAPI.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="275e28a8a23fbf149b13804ec186ec44" name="lib/api/opAPI.class.php" role="data" />
    <file baseinstalldir="/" md5sum="61ee834cbf8ad2a8a0dfa7996af091e0" name="lib/api/opAPICommunity.class.php" role="data" />
    <file baseinstalldir="/" md5sum="fade8cef35eb9f380bf0c732abf552c3" name="lib/api/opAPICommunityEvent.class.php" role="data" />
    <file baseinstalldir="/" md5sum="90965a4b0c35adbc8835fa3f91437087" name="lib/api/opAPICommunityEventComment.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="968188631c98e156d3b4ed4d348388ff" name="lib/api/opAPICommunityMember.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="2949b2f993037cd82163ebf2a2362738" name="lib/api/opAPICommunityMember.class.php" role="data" />
    <file baseinstalldir="/" md5sum="4380908364032e91c576df935a7f0d9a" name="lib/api/opAPICommunityTopic.class.php" role="data" />
    <file baseinstalldir="/" md5sum="ff979765df517a80f0ab4b9390b5045e" name="lib/api/opAPICommunityTopicComment.class.php" role="data" />
    <file baseinstalldir="/" md5sum="3bf48ced668305f13ce1d9c5109ac512" name="lib/api/opAPIDiary.class.php" role="data" />
@@ -180,6 +180,19 @@
    <date>2009-09-26</date>
    <license>apache</license>
    <notes>This plugin is now handling string type node correctly.</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.3.9</release>
+    <api>0.3.9</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2009-12-12</date>
+   <license>apache</license>
+   <notes>fixed segfault and converting Emoji</notes>
   </release>
  </changelog>
 </package>
