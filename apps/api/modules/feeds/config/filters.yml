@@ -6,5 +6,4 @@ check_oauth:
 security: ~
 
 cache:     ~
-common:    ~
 execution: ~
