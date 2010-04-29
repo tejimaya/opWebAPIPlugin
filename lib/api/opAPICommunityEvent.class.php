@@ -34,7 +34,7 @@ class opAPICommunityEvent extends opAPICommunityTopic
       }
     }
 
-    $gd = $xml->children(opGDataDocument::NAMESPACE);
+    $gd = $xml->children(opGDataDocument::GDATA_NAMESPACE);
     if (!$gd)
     {
       return false;
@@ -84,13 +84,13 @@ class opAPICommunityEvent extends opAPICommunityTopic
 
   public function addWhenElement($entry, $startTime)
   {
-    $child = $entry->addChild('when', '', opGDataDocument::NAMESPACE);
+    $child = $entry->addChild('when', '', opGDataDocument::GDATA_NAMESPACE);
     $child->addAttribute('startTime', $startTime);
   }
 
   public function addWhereElement($entry, $valueString)
   {
-    $child = $entry->addChild('where', '', opGDataDocument::NAMESPACE);
+    $child = $entry->addChild('where', '', opGDataDocument::GDATA_NAMESPACE);
     $child->addAttribute('valueString', $valueString);
   }
 }

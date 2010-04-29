@@ -20,7 +20,7 @@ abstract class opGDataDocument
   protected $elements;
 
   const XML_DECLARATION = '<?xml version="1.0" encoding="UTF-8"?>';
-  const NAMESPACE = 'http://schemas.google.com/g/2005';
+  const GDATA_NAMESPACE = 'http://schemas.google.com/g/2005';
 
   public function __construct($input = '')
   {
