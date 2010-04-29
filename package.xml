@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.7.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+<package packagerversion="1.9.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
     http://pear.php.net/dtd/tasks-1.0.xsd
     http://pear.php.net/dtd/package-2.0
     http://pear.php.net/dtd/package-2.0.xsd">
@@ -13,22 +13,24 @@
   <email />
   <active>yes</active>
  </lead>
- <date>2009-12-12</date>
- <time>22:09:35</time>
+ <date>2010-04-30</date>
+ <time>03:03:09</time>
  <version>
-  <release>0.3.9</release>
-  <api>0.3.9</api>
+  <release>0.4.0</release>
+  <api>0.4.0</api>
  </version>
  <stability>
   <release>beta</release>
   <api>beta</api>
  </stability>
  <license>apache</license>
- <notes>fixed segfault and converting Emoji</notes>
+ <notes>
+now compatible with symfony 1.4 (OpenPNE 3.4) and PHP 5.3 +
+ </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="7142864d664dd1080467a65f1b6feedc" name="apps/api/modules/feeds/actions/actions.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="5662d54f575bfe6027c9323dc5fba48d" name="apps/api/modules/feeds/config/filters.yml" role="data" />
+   <file baseinstalldir="/" md5sum="34403b755c87c437b3bd5fccbd9cdf0b" name="apps/api/modules/feeds/config/filters.yml" role="data" />
    <file baseinstalldir="/" md5sum="9825fc4647c91fc079ced0f3c17aca05" name="apps/api/modules/feeds/config/security.yml" role="data" />
    <file baseinstalldir="/" md5sum="d41d8cd98f00b204e9800998ecf8427e" name="apps/api/modules/feeds/templates/indexSuccess.php" role="data" />
    <file baseinstalldir="/" md5sum="c6fe16813b8d96dd19dd093aaeb2dbed" name="apps/pc_backend/modules/opWebAPIPlugin/actions/actions.class.php" role="data" />
@@ -42,7 +44,7 @@
    <file baseinstalldir="/" md5sum="bc219e649eb1c169bb29a2eb150d66c2" name="lib/opWebAPIRouteCollection.class.php" role="data" />
    <file baseinstalldir="/" md5sum="275e28a8a23fbf149b13804ec186ec44" name="lib/api/opAPI.class.php" role="data" />
    <file baseinstalldir="/" md5sum="61ee834cbf8ad2a8a0dfa7996af091e0" name="lib/api/opAPICommunity.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="fade8cef35eb9f380bf0c732abf552c3" name="lib/api/opAPICommunityEvent.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="65b7bd9af454d596abd1013596ae1c8f" name="lib/api/opAPICommunityEvent.class.php" role="data" />
    <file baseinstalldir="/" md5sum="90965a4b0c35adbc8835fa3f91437087" name="lib/api/opAPICommunityEventComment.class.php" role="data" />
    <file baseinstalldir="/" md5sum="2949b2f993037cd82163ebf2a2362738" name="lib/api/opAPICommunityMember.class.php" role="data" />
    <file baseinstalldir="/" md5sum="4380908364032e91c576df935a7f0d9a" name="lib/api/opAPICommunityTopic.class.php" role="data" />
@@ -53,8 +55,8 @@
    <file baseinstalldir="/" md5sum="f89be121c332ad337756f6f481c72a54" name="lib/api/opAtomPubDocument.class.php" role="data" />
    <file baseinstalldir="/" md5sum="b6683661f836e31adde3917b1d9eeece" name="lib/api/opAtomPubDocumentEntry.class.php" role="data" />
    <file baseinstalldir="/" md5sum="04957894bc45dd466de20e23807665cf" name="lib/api/opAtomPubDocumentFeed.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="dda0a9d31371cc4b7ba24772b3606a37" name="lib/api/opGDataDocument.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="8696aa9452b4b5b1e03114a0f9d11dbb" name="lib/api/opGDataDocumentEntry.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="409591cb335d8a945af442d8352335e1" name="lib/api/opGDataDocument.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="9377b8be2e70a2fb0158dcb050b72393" name="lib/api/opGDataDocumentEntry.class.php" role="data" />
    <file baseinstalldir="/" md5sum="b18819ce72a1f49495e65fd329590f5c" name="lib/api/opGDataDocumentFeed.class.php" role="data" />
    <file baseinstalldir="/" md5sum="3b83ef96387f14655fc854ddc3c6bd57" name="LICENSE" role="data" />
   </dir>
@@ -67,11 +69,6 @@
    <pearinstaller>
     <min>1.4.0</min>
    </pearinstaller>
-   <package>
-    <name>symfony</name>
-    <channel>pear.symfony-project.com</channel>
-    <min>1.2.0</min>
-   </package>
   </required>
  </dependencies>
  <phprelease />
@@ -87,7 +84,9 @@
    </stability>
    <date>2009-05-17</date>
    <license>apache</license>
-   <notes>This plugin is now compatible with Doctrine, and this is starting compatible with GData now.</notes>
+   <notes>
+This plugin is now compatible with Doctrine, and this is starting compatible with GData now.
+   </notes>
   </release>
   <release>
    <version>
@@ -100,7 +99,9 @@
    </stability>
    <date>2009-06-17</date>
    <license>apache</license>
-   <notes>added support for addtional GData futures</notes>
+   <notes>
+added support for addtional GData futures
+   </notes>
   </release>
   <release>
    <version>
@@ -113,7 +114,9 @@
    </stability>
    <date>2009-06-19</date>
    <license>apache</license>
-   <notes>Fixed some issues that are not following AtomPub protocol or GData protocol</notes>
+   <notes>
+Fixed some issues that are not following AtomPub protocol or GData protocol
+   </notes>
   </release>
   <release>
    <version>
@@ -126,8 +129,10 @@
    </stability>
    <date>2009-06-24</date>
    <license>apache</license>
-   <notes>- changed the opAPI::getMemberIdByUrl() method for slipshod checking uri format
-- fixed that opAPI::getTotalCount() doesn&apos;t return a valid count</notes>
+   <notes>
+- changed the opAPI::getMemberIdByUrl() method for slipshod checking uri format
+- fixed that opAPI::getTotalCount() doesn&apos;t return a valid count
+   </notes>
   </release>
   <release>
    <version>
@@ -140,7 +145,9 @@
    </stability>
    <date>2009-06-26</date>
    <license>apache</license>
-   <notes>fixed that the search request parameter doesn&apos;t handle double-quotation</notes>
+   <notes>
+fixed that the search request parameter doesn&apos;t handle double-quotation
+   </notes>
   </release>
   <release>
    <version>
@@ -153,7 +160,9 @@
    </stability>
    <date>2009-07-27</date>
    <license>apache</license>
-   <notes>added support for coverting emojifor DoComO format</notes>
+   <notes>
+added support for coverting emojifor DoComO format
+   </notes>
   </release>
   <release>
    <version>
@@ -166,7 +175,9 @@
    </stability>
    <date>2009-09-03</date>
    <license>apache</license>
-   <notes>Added ability to authorize by OAuth</notes>
+   <notes>
+Added ability to authorize by OAuth
+   </notes>
   </release>
   <release>
    <version>
@@ -179,7 +190,9 @@
    </stability>
    <date>2009-09-26</date>
    <license>apache</license>
-   <notes>This plugin is now handling string type node correctly.</notes>
+   <notes>
+This plugin is now handling string type node correctly.
+   </notes>
   </release>
   <release>
    <version>
@@ -192,7 +205,24 @@
    </stability>
    <date>2009-12-12</date>
    <license>apache</license>
-   <notes>fixed segfault and converting Emoji</notes>
+   <notes>
+fixed segfault and converting Emoji
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.4.0</release>
+    <api>0.4.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2010-04-30</date>
+   <license>apache</license>
+   <notes>
+now compatible with symfony 1.4 (OpenPNE 3.4) and PHP 5.3 +
+   </notes>
   </release>
  </changelog>
 </package>
