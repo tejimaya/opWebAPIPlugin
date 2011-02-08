@@ -53,7 +53,7 @@ class opAPIDiary extends opAPI implements opAPIInterface
 
   public function insert(SimpleXMLElement $xml)
   {
-    $member = Doctrine::getTable('Member')->find($xml->author->id);
+    $member = Doctrine::getTable('Member')->find($this->getMemberIdByUrl((string)$xml->author->uri));
     if (!$member)
     {
       return false;
