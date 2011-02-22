@@ -21,6 +21,8 @@ class opCheckAllowedAccessWebAPI extends opCheckOAuthAccessTokenFilter
   {
     if (0 == Doctrine::getTable('SnsConfig')->get('op_web_api_plugin_auth_type', 0))
     {
+      sfContext::getInstance()->getUser()->setAuthenticated(false);
+
       $list = Doctrine::getTable('SnsConfig')->get('op_web_api_plugin_ip_list', '127.0.0.1');
       if (in_array(@$_SERVER['REMOTE_ADDR'], explode("\n", $list)))
       {
