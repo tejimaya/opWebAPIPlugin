@@ -19,36 +19,33 @@ class opAPIDiary extends opAPI implements opAPIInterface
 {
   public function feed()
   {
-    if ($id = $this->getParameter('member_id'))
-    {
-      $diaries = Doctrine::getTable('Diary')->getMemberDiaryPager($id, $this->getParameter('_pg', 1));
-    }
-    else
-    {
-      $diaries = Doctrine::getTable('Diary')->getDiaryPager($this->getParameter('_pg', 1));
-    }
+    $this
+      ->addConditionSearchQuery()
+      ->addConditionPublished()
+      ->addConditionUpdated()
+      ->setOffsetAndLimitation()
+      ->setOrderBy();
 
-    if (!$result = $diaries->getResults())
+    $diaries = $this->getRouteObject()->execute();
+    if (!$diaries->count())
     {
       return false;
     }
 
-    $feed = $this->getGeneralFeed('Diaries');
-    foreach ($result as $diary)
+    $feed = $this->getGeneralFeed('Diaries', $this->getTotalCount());
+    foreach ($diaries as $key => $diary)
     {
       $entry = $feed->addEntry();
       $this->createEntryByInstance($diary, $entry);
     }
-    $feed->setUpdated($result[0]->getCreatedAt());
+    $feed->setUpdated($diaries->getFirst()->getCreatedAt());
 
     return $feed->publish();
   }
 
   public function entry()
   {
-    $id = $this->getRequiredParameter('id');
-    $diary = Doctrine::getTable('Diary')->find($id);
-    return $diary;
+    return $this->getRouteObject()->fetchOne();
   }
 
   public function insert(SimpleXMLElement $xml)
@@ -70,8 +67,7 @@ class opAPIDiary extends opAPI implements opAPIInterface
 
   public function update(SimpleXMLElement $xml)
   {
-    $id = $this->getRequiredParameter('id');
-    $diary = Doctrine::getTable('Diary')->find($id);
+    $diary = $this->getRouteObject()->fetchOne();
     if (!$diary || $this->generateEntryId($diary) != $xml->id)
     {
       return false;
@@ -86,8 +82,7 @@ class opAPIDiary extends opAPI implements opAPIInterface
 
   public function delete()
   {
-    $id = $this->getRequiredParameter('id');
-    $diary = Doctrine::getTable('Diary')->find($id);
+    $diary = $this->getRouteObject()->fetchOne();
     if (!$diary)
     {
       return false;
