@@ -13,11 +13,17 @@
   <email />
   <active>yes</active>
  </lead>
- <date>2010-04-30</date>
- <time>03:03:09</time>
+ <lead>
+  <name>Shingo Yamada</name>
+  <user>shingo</user>
+  <email />
+  <active>yes</active>
+ </lead>
+ <date>2011-06-17</date>
+ <time>17:09:09</time>
  <version>
-  <release>0.4.0</release>
-  <api>0.4.0</api>
+  <release>0.5.0</release>
+  <api>0.5.0</api>
  </version>
  <stability>
   <release>beta</release>
@@ -25,7 +31,7 @@
  </stability>
  <license>apache</license>
  <notes>
-now compatible with symfony 1.4 (OpenPNE 3.4) and PHP 5.3 +
+fixed updated the diary feed to current the specifications(fixes #1070)
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -49,7 +55,7 @@ now compatible with symfony 1.4 (OpenPNE 3.4) and PHP 5.3 +
    <file baseinstalldir="/" md5sum="2949b2f993037cd82163ebf2a2362738" name="lib/api/opAPICommunityMember.class.php" role="data" />
    <file baseinstalldir="/" md5sum="4380908364032e91c576df935a7f0d9a" name="lib/api/opAPICommunityTopic.class.php" role="data" />
    <file baseinstalldir="/" md5sum="ff979765df517a80f0ab4b9390b5045e" name="lib/api/opAPICommunityTopicComment.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="3bf48ced668305f13ce1d9c5109ac512" name="lib/api/opAPIDiary.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="aad398ee60e474e2dbe44d9e32ba2984" name="lib/api/opAPIDiary.class.php" role="data" />
    <file baseinstalldir="/" md5sum="a19cbef309a27f7b3094fdf0f7a9087d" name="lib/api/opAPIInterface.class.php" role="data" />
    <file baseinstalldir="/" md5sum="26514798ea7b1dadddb6fcd4466f5b6d" name="lib/api/opAPIMember.class.php" role="data" />
    <file baseinstalldir="/" md5sum="f89be121c332ad337756f6f481c72a54" name="lib/api/opAtomPubDocument.class.php" role="data" />
@@ -222,6 +228,21 @@ fixed segfault and converting Emoji
    <license>apache</license>
    <notes>
 now compatible with symfony 1.4 (OpenPNE 3.4) and PHP 5.3 +
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.5.0</release>
+    <api>0.5.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2011-06-17</date>
+   <license>apache</license>
+   <notes>
+fixed updated the diary feed to current the specifications(fixes #1070)
    </notes>
   </release>
  </changelog>
