@@ -283,7 +283,7 @@ abstract class opAPI
 
         $queryString .= ')';
 
-        $this->query->andWhere($queryString, array_fill(0, count($this->getSearchableFields()), '%'.$token.'%'));
+        $this->query->andWhere($queryString, array_fill(0, count($this->getSearchableFields()), '%'.Doctrine_Manager::connection()->formatter->escapePattern($token).'%'));
 
         $token = strtok(' ');
       }
