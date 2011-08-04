@@ -283,6 +283,11 @@ abstract class opAPI
 
         $queryString .= ')';
 
+        if (defined('OPENPNE_VERSION') && version_compare(OPENPNE_VERSION, '3.6beta13-dev', '>='))
+        {
+          $token = Doctrine_Manager::connection()->formatter->escapePattern($token);
+        }
+
         $this->query->andWhere($queryString, array_fill(0, count($this->getSearchableFields()), '%'.$token.'%'));
 
         $token = strtok(' ');
