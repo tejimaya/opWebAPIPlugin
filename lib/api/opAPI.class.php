@@ -283,9 +283,9 @@ abstract class opAPI
 
         $queryString .= ')';
 
-        if (defined('OPENPNE_VERSION') && version_compare(OPENPNE_VERSION, '3.6beta13-dev', '>='))
+        if (method_exists($this->query, 'escapePattern'))
         {
-          $token = Doctrine_Manager::connection()->formatter->escapePattern($token);
+          $token = $this->query->escapePattern($token);
         }
 
         $this->query->andWhere($queryString, array_fill(0, count($this->getSearchableFields()), '%'.$token.'%'));
