@@ -156,8 +156,10 @@ abstract class opAPI
     $this->totalCount = $q->select('COUNT(DISTINCT id)')->execute(array(), Doctrine::HYDRATE_SINGLE_SCALAR);
     $this->getQuery()->setHydrationMode(Doctrine::HYDRATE_RECORD);
 
-    $this->query->limit($this->getParameter('max-results', 25));
-    $this->query->offset($this->getParameter('start', 1) - 1);
+    $maxResults = $this->getParameter('max-results', 25);
+    $this->query->limit(is_numeric($maxResults) ? $maxResults : 25);
+    $start = $this->getParameter('start', 1);
+    $this->query->offset(is_numeric($start) ? $start - 1 : 0);
 
     return $this;
   }
@@ -282,6 +284,11 @@ abstract class opAPI
         }
 
         $queryString .= ')';
+
+        if (method_exists($this->query, 'escapePattern'))
+        {
+          $token = $this->query->escapePattern($token);
+        }
 
         $this->query->andWhere($queryString, array_fill(0, count($this->getSearchableFields()), '%'.$token.'%'));
 
