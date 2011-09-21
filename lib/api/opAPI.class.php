@@ -157,9 +157,9 @@ abstract class opAPI
     $this->getQuery()->setHydrationMode(Doctrine::HYDRATE_RECORD);
 
     $maxResults = $this->getParameter('max-results', 25);
-    $this->query->limit((is_numeric($maxResults) && 1 <= $maxResults) ? $maxResults : 25);
+    $this->query->limit((ctype_digit((string)$maxResults) && 1 <= $maxResults) ? $maxResults : 25);
     $start = $this->getParameter('start', 1);
-    $this->query->offset((is_numeric($start) && 1 <= $start) ? $start - 1 : 0);
+    $this->query->offset((ctype_digit((string)$start) && 1 <= $start) ? $start - 1 : 0);
 
     return $this;
   }
