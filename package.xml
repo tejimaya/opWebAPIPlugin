@@ -19,11 +19,17 @@
   <email />
   <active>yes</active>
  </lead>
- <date>2011-06-17</date>
- <time>17:09:09</time>
+ <lead>
+  <name>Yuya Watanabe</name>
+  <user>watanabe</user>
+  <email />
+  <active>yes</active>
+ </lead>
+ <date>2011-09-22</date>
+ <time>16:58:37</time>
  <version>
-  <release>0.5.0</release>
-  <api>0.5.0</api>
+  <release>0.5.1</release>
+  <api>0.5.1</api>
  </version>
  <stability>
   <release>beta</release>
@@ -31,7 +37,8 @@
  </stability>
  <license>apache</license>
  <notes>
-fixed updated the diary feed to current the specifications(fixes #1070)
+Bug（バグ） #2233: max-resultsの値に整数以外の値を入力した際に全件表示されてしまう
+Bug（バグ） #2339: 部分一致検索を行う箇所でワイルドカード検索ができてしまう
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -48,7 +55,7 @@ fixed updated the diary feed to current the specifications(fixes #1070)
    <file baseinstalldir="/" md5sum="97affd128c5aa37edc37b8f1bf1052dd" name="lib/opCheckAllowedAccessWebAPI.class.php" role="data" />
    <file baseinstalldir="/" md5sum="7436260e21fcdcf61960f2386c1637c9" name="lib/opWebAPIRoute.class.php" role="data" />
    <file baseinstalldir="/" md5sum="bc219e649eb1c169bb29a2eb150d66c2" name="lib/opWebAPIRouteCollection.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="275e28a8a23fbf149b13804ec186ec44" name="lib/api/opAPI.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="6a00e97005210ca5cdc0fc2af2131ba3" name="lib/api/opAPI.class.php" role="data" />
    <file baseinstalldir="/" md5sum="61ee834cbf8ad2a8a0dfa7996af091e0" name="lib/api/opAPICommunity.class.php" role="data" />
    <file baseinstalldir="/" md5sum="65b7bd9af454d596abd1013596ae1c8f" name="lib/api/opAPICommunityEvent.class.php" role="data" />
    <file baseinstalldir="/" md5sum="90965a4b0c35adbc8835fa3f91437087" name="lib/api/opAPICommunityEventComment.class.php" role="data" />
@@ -243,6 +250,22 @@ now compatible with symfony 1.4 (OpenPNE 3.4) and PHP 5.3 +
    <license>apache</license>
    <notes>
 fixed updated the diary feed to current the specifications(fixes #1070)
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.5.1</release>
+    <api>0.5.1</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2011-09-22</date>
+   <license>apache</license>
+   <notes>
+Bug（バグ） #2233: max-resultsの値に整数以外の値を入力した際に全件表示されてしまう
+Bug（バグ） #2339: 部分一致検索を行う箇所でワイルドカード検索ができてしまう
    </notes>
   </release>
  </changelog>
