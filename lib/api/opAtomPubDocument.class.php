@@ -23,7 +23,7 @@ abstract class opAtomPubDocument
   {
     if ($input)
     {
-      $xml = opAtomPubDocument::loadXml($input);
+      $xml = @opAtomPubDocument::loadXml($input);
       if (!$xml)
       {
         throw new RuntimeException('The inputed data is not a valid XML.');
@@ -36,18 +36,18 @@ abstract class opAtomPubDocument
     }
   }
 
-  static public function loadXml($input = '')
+  public static function loadXml($input)
   {
     if (is_callable('opToolkit::loadXmlString'))
     {
-      $xml = @opToolkit::loadXmlString($input, array(
+      $xml = opToolkit::loadXmlString($input, array(
         'return' => 'SimpleXMLElement',
       ));
     }
     else
     {
       $entityLoaderConfig = libxml_disable_entity_loader(true);
-      $xml = @simplexml_load_string($input);
+      $xml = simplexml_load_string($input);
       libxml_disable_entity_loader($entityLoaderConfig);
     }
 
