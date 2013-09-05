@@ -26,7 +26,7 @@ abstract class opGDataDocument
   {
     if ($input)
     {
-      $xml = opAtomPubDocument::loadXml($input);
+      $xml = @opAtomPubDocument::loadXml($input);
 
       if (!$xml)
       {
