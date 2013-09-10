@@ -25,11 +25,11 @@
   <email />
   <active>yes</active>
  </lead>
- <date>2011-09-22</date>
- <time>16:58:37</time>
+ <date>2013-09-09</date>
+ <time>20:26:26</time>
  <version>
-  <release>0.5.1</release>
-  <api>0.5.1</api>
+  <release>0.5.1.1</release>
+  <api>0.5.1.1</api>
  </version>
  <stability>
   <release>beta</release>
@@ -37,8 +37,7 @@
  </stability>
  <license>apache</license>
  <notes>
-Bug（バグ） #2233: max-resultsの値に整数以外の値を入力した際に全件表示されてしまう
-Bug（バグ） #2339: 部分一致検索を行う箇所でワイルドカード検索ができてしまう
+Disabled xml external entity loader (OPSA-2013-003)
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -65,10 +64,10 @@ Bug（バグ） #2339: 部分一致検索を行う箇所でワイルドカード
    <file baseinstalldir="/" md5sum="aad398ee60e474e2dbe44d9e32ba2984" name="lib/api/opAPIDiary.class.php" role="data" />
    <file baseinstalldir="/" md5sum="a19cbef309a27f7b3094fdf0f7a9087d" name="lib/api/opAPIInterface.class.php" role="data" />
    <file baseinstalldir="/" md5sum="26514798ea7b1dadddb6fcd4466f5b6d" name="lib/api/opAPIMember.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="f89be121c332ad337756f6f481c72a54" name="lib/api/opAtomPubDocument.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="4a8caee8668034117ed72c809fe7c54a" name="lib/api/opAtomPubDocument.class.php" role="data" />
    <file baseinstalldir="/" md5sum="b6683661f836e31adde3917b1d9eeece" name="lib/api/opAtomPubDocumentEntry.class.php" role="data" />
    <file baseinstalldir="/" md5sum="04957894bc45dd466de20e23807665cf" name="lib/api/opAtomPubDocumentFeed.class.php" role="data" />
-   <file baseinstalldir="/" md5sum="409591cb335d8a945af442d8352335e1" name="lib/api/opGDataDocument.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="eec528b131ee022c80ef9b52ce7acb96" name="lib/api/opGDataDocument.class.php" role="data" />
    <file baseinstalldir="/" md5sum="9377b8be2e70a2fb0158dcb050b72393" name="lib/api/opGDataDocumentEntry.class.php" role="data" />
    <file baseinstalldir="/" md5sum="b18819ce72a1f49495e65fd329590f5c" name="lib/api/opGDataDocumentFeed.class.php" role="data" />
    <file baseinstalldir="/" md5sum="3b83ef96387f14655fc854ddc3c6bd57" name="LICENSE" role="data" />
@@ -266,6 +265,21 @@ fixed updated the diary feed to current the specifications(fixes #1070)
    <notes>
 Bug（バグ） #2233: max-resultsの値に整数以外の値を入力した際に全件表示されてしまう
 Bug（バグ） #2339: 部分一致検索を行う箇所でワイルドカード検索ができてしまう
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.5.1.1</release>
+    <api>0.5.1.1</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2013-09-09</date>
+   <license>apache</license>
+   <notes>
+Disabled xml external entity loader (OPSA-2013-003)
    </notes>
   </release>
  </changelog>

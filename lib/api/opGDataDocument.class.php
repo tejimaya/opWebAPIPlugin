@@ -26,7 +26,8 @@ abstract class opGDataDocument
   {
     if ($input)
     {
-      $xml = @simplexml_load_string($input);
+      $xml = @opAtomPubDocument::loadXml($input);
+
       if (!$xml)
       {
         throw new RuntimeException('The inputed data is not a valid XML.');
@@ -35,7 +36,7 @@ abstract class opGDataDocument
     }
     else
     {
-      $this->elements = simplexml_load_string($this->getRootXMLString());
+      $this->elements = opAtomPubDocument::loadXml($this->getRootXMLString());
     }
   }
 
