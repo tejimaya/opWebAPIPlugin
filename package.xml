@@ -8,12 +8,6 @@
  <summary>opWebAPIPlugin</summary>
  <description>opWebAPIPlugin</description>
  <lead>
-  <name>Kousuke Ebihara</name>
-  <user>ebihara</user>
-  <email />
-  <active>yes</active>
- </lead>
- <lead>
   <name>Shingo Yamada</name>
   <user>shingo</user>
   <email />
@@ -25,11 +19,23 @@
   <email />
   <active>yes</active>
  </lead>
- <date>2013-09-09</date>
- <time>20:26:26</time>
+ <lead>
+  <name>kaoru nishizoe</name>
+  <user>nishizoe</user>
+  <email />
+  <active>yes</active>
+ </lead>
+ <contributor>
+  <name>Kousuke Ebihara</name>
+  <user>ebihara</user>
+  <email />
+  <active>yes</active>
+ </contributor>
+ <date>2016-11-09</date>
+ <time>18:08:30</time>
  <version>
-  <release>0.5.1.1</release>
-  <api>0.5.1.1</api>
+  <release>0.5.1.2</release>
+  <api>0.5.1.2</api>
  </version>
  <stability>
   <release>beta</release>
@@ -37,7 +43,7 @@
  </stability>
  <license>apache</license>
  <notes>
-Disabled xml external entity loader (OPSA-2013-003)
+version 0.5.1.2 for OPSA-2016-002
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -51,7 +57,7 @@ Disabled xml external entity loader (OPSA-2013-003)
    <file baseinstalldir="/" md5sum="eecb620c933dac7c9b4ab114bf0c5a63" name="config/routing.yml" role="data" />
    <file baseinstalldir="/" md5sum="271b6871602b022a48278bd5ae94114c" name="data/fixtures/010_default_api_configuration.yml" role="data" />
    <file baseinstalldir="/" md5sum="0784018e5c535778e61ef1462866dc2d" name="i18n/api.ja.xml" role="data" />
-   <file baseinstalldir="/" md5sum="97affd128c5aa37edc37b8f1bf1052dd" name="lib/opCheckAllowedAccessWebAPI.class.php" role="data" />
+   <file baseinstalldir="/" md5sum="4c685a3e995302cd5d1c0c037d4d277a" name="lib/opCheckAllowedAccessWebAPI.class.php" role="data" />
    <file baseinstalldir="/" md5sum="7436260e21fcdcf61960f2386c1637c9" name="lib/opWebAPIRoute.class.php" role="data" />
    <file baseinstalldir="/" md5sum="bc219e649eb1c169bb29a2eb150d66c2" name="lib/opWebAPIRouteCollection.class.php" role="data" />
    <file baseinstalldir="/" md5sum="6a00e97005210ca5cdc0fc2af2131ba3" name="lib/api/opAPI.class.php" role="data" />
@@ -280,6 +286,21 @@ Bug（バグ） #2339: 部分一致検索を行う箇所でワイルドカード
    <license>apache</license>
    <notes>
 Disabled xml external entity loader (OPSA-2013-003)
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.5.1.2</release>
+    <api>0.5.1.2</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2016-11-09</date>
+   <license>apache</license>
+   <notes>
+version 0.5.1.2 for OPSA-2016-002
    </notes>
   </release>
  </changelog>
